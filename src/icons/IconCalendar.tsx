@@ -1,5 +1,5 @@
-import React from "react";
-import IconBase, { IconProps } from "./IconBase";
+import React from 'react';
+import IconBase, { IconProps } from './IconBase';
 
 const IconCalendar = (props: IconProps) => (
   <IconBase {...props}>

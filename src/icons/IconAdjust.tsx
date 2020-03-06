@@ -1,5 +1,5 @@
-import React from "react";
-import IconBase, { IconProps } from "./IconBase";
+import React from 'react';
+import IconBase, { IconProps } from './IconBase';
 
 const IconAdjust = (props: IconProps) => (
   <IconBase {...props}>

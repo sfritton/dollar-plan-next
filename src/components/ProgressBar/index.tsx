@@ -1,5 +1,5 @@
-import React from "react";
-import "./progress-bar.css";
+import React from 'react';
+import './progress-bar.css';
 
 interface Props {
   numerator: number;
@@ -9,14 +9,14 @@ interface Props {
 
 const getProgressBarClassName = ({ numerator, denominator, danger }: Props) => {
   if (denominator <= 0 && numerator <= 0) {
-    return "progress-bar--null";
+    return 'progress-bar--null';
   }
 
   if (numerator > denominator && danger) {
-    return "progress-bar--danger";
+    return 'progress-bar--danger';
   }
 
-  return "progress-bar--inner";
+  return 'progress-bar--inner';
 };
 
 function ProgressBar(props: Props) {

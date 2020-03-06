@@ -90,16 +90,14 @@
   height: 48px;
   border-radius: 24px;
   padding: var(--space-x3);
-  box-shadow: 0 var(--space-x1) var(--space-x2) var(--space-x1)
-    var(--color-shadow);
+  box-shadow: 0 var(--space-x1) var(--space-x2) var(--space-x1) var(--color-shadow);
 }
 
 .btn-floating-action .btn-floating-action--label {
   max-width: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-width var(--anim-duration-long) ease,
-    opacity var(--anim-duration-long) ease;
+  transition: max-width var(--anim-duration-long) ease, opacity var(--anim-duration-long) ease;
   white-space: nowrap;
 }
 

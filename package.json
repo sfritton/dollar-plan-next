@@ -10,7 +10,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "yarn run lint --fix"
   },
   "dependencies": {
     "next": "^9.2.2",

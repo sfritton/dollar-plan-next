@@ -1,7 +1,4 @@
-const classNames = (
-  conditionalNames: Record<string, boolean | undefined>,
-  ...permanentNames: (string | undefined)[]
-) =>
+const classNames = (conditionalNames: Record<string, boolean | undefined>, ...permanentNames: (string | undefined)[]) =>
   Object.entries(conditionalNames)
     .reduce((acc, [key, value]) => {
       if (!value) return acc;
@@ -9,6 +6,6 @@ const classNames = (
       return [...acc, key];
     }, permanentNames)
     .filter(className => Boolean(className))
-    .join(" ");
+    .join(' ');
 
 export default classNames;

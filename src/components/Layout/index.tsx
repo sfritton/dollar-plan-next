@@ -1,6 +1,6 @@
-import React from "react";
-import "./layout.css";
-import classNames from "../../util/classNames";
+import React from 'react';
+import './layout.css';
+import classNames from '../../util/classNames';
 
 interface Props {
   className?: string;
@@ -8,25 +8,25 @@ interface Props {
 }
 
 const Grid: React.FC<Props> = ({ children, className, innerRef }) => (
-  <div ref={innerRef} className={classNames({}, "layout--grid", className)}>
+  <div ref={innerRef} className={classNames({}, 'layout--grid', className)}>
     {children}
   </div>
 );
 
 const Header: React.FC<Props> = ({ children, className, innerRef }) => (
-  <div ref={innerRef} className={classNames({}, "layout--header", className)}>
+  <div ref={innerRef} className={classNames({}, 'layout--header', className)}>
     {children}
   </div>
 );
 
 const Content: React.FC<Props> = ({ children, className, innerRef }) => (
-  <div ref={innerRef} className={classNames({}, "layout--content", className)}>
+  <div ref={innerRef} className={classNames({}, 'layout--content', className)}>
     {children}
   </div>
 );
 
 const Footer: React.FC<Props> = ({ children, className, innerRef }) => (
-  <div ref={innerRef} className={classNames({}, "layout--footer", className)}>
+  <div ref={innerRef} className={classNames({}, 'layout--footer', className)}>
     {children}
   </div>
 );
@@ -35,7 +35,7 @@ const Layout = {
   Grid,
   Header,
   Content,
-  Footer
+  Footer,
 };
 
 export default Layout;
