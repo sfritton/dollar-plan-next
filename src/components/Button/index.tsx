@@ -1,5 +1,5 @@
 import React from 'react';
-import './button.css';
+import styles from './button.module.css';
 import classNames from '../../util/classNames';
 import { IconProps } from '../../icons/IconBase';
 
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const ButtonBase: React.FC<Props> = ({ children, small, onClick, className }) => (
-  <button className={classNames({ 'btn-small': small }, 'btn', className)} onClick={onClick}>
+  <button className={classNames({ [styles.small]: small }, styles.base, className)} onClick={onClick}>
     {children}
   </button>
 );
@@ -18,11 +18,11 @@ const ButtonBase: React.FC<Props> = ({ children, small, onClick, className }) =>
 export const ButtonPrimary = ButtonBase;
 
 export const ButtonSecondary: React.FC<Props> = ({ className, ...restProps }) => (
-  <ButtonBase {...restProps} className={classNames({}, 'btn-secondary', className)} />
+  <ButtonBase {...restProps} className={classNames({}, styles.secondary, className)} />
 );
 
 export const ButtonOutline: React.FC<Props> = ({ className, ...restProps }) => (
-  <ButtonBase {...restProps} className={classNames({}, 'btn-outline', className)} />
+  <ButtonBase {...restProps} className={classNames({}, styles.outline, className)} />
 );
 
 interface ButtonWithIconProps extends Props {
@@ -31,15 +31,15 @@ interface ButtonWithIconProps extends Props {
 }
 
 export const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({ className, Icon, label, ...restProps }) => (
-  <ButtonBase {...restProps} className={classNames({}, 'btn-secondary btn-with-icon', className)}>
-    <Icon size={32} className="btn-with-icon--icon" />
-    <span className="btn-with-icon--label">{label}</span>
+  <ButtonBase {...restProps} className={classNames({}, styles.secondary, styles.withIcon, className)}>
+    <Icon size={32} className={styles.icon} />
+    <span className={styles.iconLabel}>{label}</span>
   </ButtonBase>
 );
 
 export const ButtonFloatingAction: React.FC<ButtonWithIconProps> = ({ className, Icon, label, ...restProps }) => (
-  <ButtonBase {...restProps} className={classNames({}, 'btn-floating-action', className)}>
+  <ButtonBase {...restProps} className={classNames({}, styles.floatingAction, className)}>
     <Icon />
-    <div className="btn-floating-action--label">{label}</div>
+    <div className={styles.floatingActionLabel}>{label}</div>
   </ButtonBase>
 );

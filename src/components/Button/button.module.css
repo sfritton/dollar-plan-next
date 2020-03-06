@@ -1,4 +1,4 @@
-.btn {
+.base {
   font-weight: normal;
   text-decoration: none;
   background: var(--color-secondary);
@@ -10,68 +10,68 @@
   transition: transform var(--anim-duration-long) ease;
 }
 
-.btn:hover {
+.base:hover {
   cursor: pointer;
   background: var(--color-secondary-light);
   transform: scale(1.02);
 }
 
-.btn:active {
+.base:active {
   box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.25);
   background: var(--color-secondary-dark);
 }
 
-.btn-secondary,
-.btn-outline {
+.secondary,
+.outline {
   background: transparent;
   color: var(--color-secondary);
 }
 
-.btn-secondary:hover,
-.btn-outline:hover {
+.secondary:hover,
+.outline:hover {
   background: transparent;
   color: var(--color-secondary-light);
 }
 
-.btn-secondary:active,
-.btn-outline:active {
+.secondary:active,
+.outline:active {
   box-shadow: none;
   background: transparent;
   color: var(--color-secondary-dark);
 }
 
-.btn-outline {
+.outline {
   border: 1px solid var(--color-secondary);
 }
 
-.btn-outline:hover,
-.btn-outline:focus {
+.outline:hover,
+.outline:focus {
   border-color: var(--color-primary-dark-text);
   color: var(--color-primary-dark-text);
 }
 
-.btn-outline:active {
+.outline:active {
   border-color: var(--color-secondary-dark);
   color: var(--color-secondary-dark);
 }
 
-.btn-with-icon {
+.withIcon {
   padding: var(--space-x2);
   margin: calc(var(--space-x2) * -1);
   border-radius: 50%;
 }
 
-.btn-with-icon:focus,
-.btn-with-icon:hover {
+.withIcon:focus,
+.withIcon:hover {
   background: rgba(0, 0, 0, 0.125);
 }
 
-.btn-with-icon--icon {
+.icon {
   display: block;
   fill: var(--color-primary-dark-text);
 }
 
-.btn-with-icon--label {
+.label {
   position: absolute;
   display: inline-block;
   width: 1px;
@@ -81,7 +81,7 @@
   overflow: hidden;
 }
 
-.btn-floating-action {
+.floatingAction {
   position: fixed;
   display: flex;
   align-items: center;
@@ -93,7 +93,7 @@
   box-shadow: 0 var(--space-x1) var(--space-x2) var(--space-x1) var(--color-shadow);
 }
 
-.btn-floating-action .btn-floating-action--label {
+.floatingAction .floatingActionLabel {
   max-width: 0;
   opacity: 0;
   overflow: hidden;
@@ -101,19 +101,19 @@
   white-space: nowrap;
 }
 
-.btn-floating-action:focus .btn-floating-action--label,
-.btn-floating-action:active .btn-floating-action--label,
-.btn-floating-action:hover .btn-floating-action--label {
+.floatingAction:focus .floatingActionLabel,
+.floatingAction:active .floatingActionLabel,
+.floatingAction:hover .floatingActionLabel {
   max-width: 140px;
   opacity: 1;
 }
 
-.btn:focus {
+.base:focus {
   outline: none;
   text-decoration: underline;
 }
 
-.btn-small {
+.small {
   padding: var(--space-x1) var(--space-x2);
   font-size: var(--text-sm);
 }

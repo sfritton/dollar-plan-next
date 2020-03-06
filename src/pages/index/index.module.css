@@ -1,0 +1,41 @@
+.container {
+  height: 100vh;
+  background: var(--color-primary-dark);
+  text-align: center;
+  overflow: hidden;
+  padding: 0 var(--space-x6);
+}
+
+.fadeIn {
+  animation: fadeIn var(--anim-duration-long) 600ms ease;
+  animation-fill-mode: both;
+}
+
+.wideButton {
+  margin: var(--space-x3) auto;
+  width: 300px;
+  max-width: 100%;
+  display: block;
+}
+
+.title {
+  margin-top: var(--space-x6);
+  margin-bottom: var(--space-x6);
+  font-size: 56px;
+  animation: up var(--anim-duration-long) ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes up {
+  from {
+    margin-top: 40vh;
+  }
+}
