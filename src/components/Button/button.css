@@ -1,0 +1,121 @@
+.btn {
+  font-weight: normal;
+  text-decoration: none;
+  background: var(--color-secondary);
+  color: var(--color-secondary-text);
+  border: none;
+  padding: var(--space-x2) var(--space-x3);
+  border-radius: var(--space-x1);
+  font-size: var(--text-md);
+  transition: transform var(--anim-duration-long) ease;
+}
+
+.btn:hover {
+  cursor: pointer;
+  background: var(--color-secondary-light);
+  transform: scale(1.02);
+}
+
+.btn:active {
+  box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.25);
+  background: var(--color-secondary-dark);
+}
+
+.btn-secondary,
+.btn-outline {
+  background: transparent;
+  color: var(--color-secondary);
+}
+
+.btn-secondary:hover,
+.btn-outline:hover {
+  background: transparent;
+  color: var(--color-secondary-light);
+}
+
+.btn-secondary:active,
+.btn-outline:active {
+  box-shadow: none;
+  background: transparent;
+  color: var(--color-secondary-dark);
+}
+
+.btn-outline {
+  border: 1px solid var(--color-secondary);
+}
+
+.btn-outline:hover,
+.btn-outline:focus {
+  border-color: var(--color-primary-dark-text);
+  color: var(--color-primary-dark-text);
+}
+
+.btn-outline:active {
+  border-color: var(--color-secondary-dark);
+  color: var(--color-secondary-dark);
+}
+
+.btn-with-icon {
+  padding: var(--space-x2);
+  margin: calc(var(--space-x2) * -1);
+  border-radius: 50%;
+}
+
+.btn-with-icon:focus,
+.btn-with-icon:hover {
+  background: rgba(0, 0, 0, 0.125);
+}
+
+.btn-with-icon--icon {
+  display: block;
+  fill: var(--color-primary-dark-text);
+}
+
+.btn-with-icon--label {
+  position: absolute;
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  clip: rect(0px, 0px, 0px, 0px);
+  margin: -1px;
+  overflow: hidden;
+}
+
+.btn-floating-action {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  bottom: var(--space-x4);
+  right: var(--space-x4);
+  height: 48px;
+  border-radius: 24px;
+  padding: var(--space-x3);
+  box-shadow: 0 var(--space-x1) var(--space-x2) var(--space-x1)
+    var(--color-shadow);
+}
+
+.btn-floating-action .btn-floating-action--label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-width var(--anim-duration-long) ease,
+    opacity var(--anim-duration-long) ease;
+  white-space: nowrap;
+}
+
+.btn-floating-action:focus .btn-floating-action--label,
+.btn-floating-action:active .btn-floating-action--label,
+.btn-floating-action:hover .btn-floating-action--label {
+  max-width: 140px;
+  opacity: 1;
+}
+
+.btn:focus {
+  outline: none;
+  text-decoration: underline;
+}
+
+.btn-small {
+  padding: var(--space-x1) var(--space-x2);
+  font-size: var(--text-sm);
+}

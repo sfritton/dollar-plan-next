@@ -1,0 +1,124 @@
+.input-base {
+  display: inline-block;
+  position: relative;
+
+  border-bottom: 1px solid var(--color-primary-light);
+  background: rgba(0, 0, 0, 0.125);
+  border-radius: 4px 4px 0 0;
+}
+
+.input-base > * {
+  padding: 18px var(--space-x3) var(--space-x1);
+  font-weight: normal;
+}
+
+.input-base--input,
+.input-base--select {
+  display: inline-block;
+  width: 100%;
+  background: none;
+  border: none;
+  font-size: var(--text-md);
+  color: var(--color-text-light);
+}
+
+/* --------------------------------------------------------
+ * HOVER
+ * -------------------------------------------------------- */
+.input-base:hover {
+  border-bottom: 1px solid var(--color-primary-lighter);
+}
+
+/* --------------------------------------------------------
+ * FOCUS
+ * -------------------------------------------------------- */
+.input-base:after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  height: 2px;
+  transform: scaleX(0);
+  transition: transform 300ms;
+}
+
+.input-base:focus-within:after {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------
+ * PLACEHOLDER
+ * -------------------------------------------------------- */
+.input-base--input::placeholder {
+  color: var(--color-primary-lighter);
+}
+
+/* --------------------------------------------------------
+ * LABEL
+ * -------------------------------------------------------- */
+.input-base--label {
+  color: var(--color-primary-lighter);
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  padding-top: var(--space-x3);
+  transition: var(--anim-duration-default);
+}
+
+.input-base--label--floating,
+.input-base:focus-within .input-base--label {
+  font-size: var(--text-xs);
+  padding-top: var(--space-x1);
+}
+
+/* --------------------------------------------------------
+ * PREFIX
+ * -------------------------------------------------------- */
+.input-base--prefix {
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+}
+
+.input-base--with-prefix {
+  padding-left: 28px;
+}
+
+/* --------------------------------------------------------
+ * SELECT
+ * -------------------------------------------------------- */
+.input-base--select {
+  padding-right: 32px;
+}
+
+.input-base--select option {
+  color: var(--color-text-dark);
+}
+
+.input-base--select-icon {
+  fill: var(--color-text-light);
+  padding: var(--space-x3) var(--space-x1) 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------
+ * OVERRIDES
+ * -------------------------------------------------------- */
+.input-base--input::-webkit-outer-spin-button,
+.input-base--input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.input-base--input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-base--select {
+  -webkit-appearance: none;
+}

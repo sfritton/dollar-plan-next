@@ -1,0 +1,29 @@
+.card {
+  display: block;
+  background: var(--color-primary-dark);
+  color: var(--color-primary-dark-text);
+  padding: var(--space-x3);
+  border-radius: var(--space-x1);
+}
+
+.card--btn {
+  text-decoration: none;
+}
+
+.card--btn:hover {
+  cursor: pointer;
+  background: var(--color-primary-dark-hover);
+}
+
+.card--btn:focus {
+  outline: none;
+}
+
+.card--btn:focus {
+  text-decoration: underline;
+}
+
+.card-btn:active {
+  box-shadow: inset 0px 3px 10px var(--color-shadow);
+  background: var(--color-primary-dark);
+}

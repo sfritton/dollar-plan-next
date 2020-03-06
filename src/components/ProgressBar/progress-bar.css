@@ -1,0 +1,30 @@
+.progress-bar {
+  border-radius: var(--space-x1);
+  box-shadow: inset 0 3px 5px var(--color-shadow);
+  background: white;
+  height: var(--space-x2);
+  min-width: var(--space-x2);
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.progress-bar--null,
+.progress-bar--inner,
+.progress-bar--danger {
+  height: 100%;
+  transition: transform 600ms ease-out, background 600ms ease-out;
+  transform-origin: left;
+}
+
+.progress-bar--inner {
+  background: var(--color-secondary-dark);
+}
+
+.progress-bar--danger {
+  background: var(--color-danger);
+}
+
+.progress-bar--null {
+  background: var(--color-null);
+  width: 100% !important;
+}
