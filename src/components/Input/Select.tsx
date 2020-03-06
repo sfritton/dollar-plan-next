@@ -1,5 +1,7 @@
 import React from 'react';
+import styles from './input.module.css';
 import IconDropdown from '../../icons/IconDropdown';
+import classNames from '../../util/classNames';
 
 interface Props {
   className?: string;
@@ -10,12 +12,12 @@ interface Props {
 }
 
 const Select: React.FC<Props> = ({ className = '', children, defaultValue, label, onChange, value }) => (
-  <div className={`input-base ${className}`}>
-    <label className="input-base--label input-base--label--floating">{label}</label>
-    <select className="input-base--select" value={value} defaultValue={defaultValue} onChange={onChange}>
+  <div className={classNames(styles.base, className)}>
+    <label className={classNames(styles.base, styles.label, styles.labelFloating)}>{label}</label>
+    <select className={styles.select} value={value} defaultValue={defaultValue} onChange={onChange}>
       {children}
     </select>
-    <div className="input-base--select-icon">
+    <div className={styles.selectIcon}>
       <IconDropdown />
     </div>
   </div>

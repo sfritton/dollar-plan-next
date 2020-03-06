@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import classNames from '../../util/classNames';
-import './input.css';
+import styles from './input.module.css';
 
 type OnChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
@@ -32,21 +32,21 @@ const InputBase: React.FC<InputProps & {
   );
 
   return (
-    <div className={`input-base ${className}`}>
-      {prefix && <div className="input-base--prefix">{prefix}</div>}
+    <div className={classNames(styles.base, className)}>
+      {prefix && <div className={styles.prefix}>{prefix}</div>}
       <label
         className={classNames({
-          'input-base--label': true,
-          'input-base--label--floating': Boolean(isLabelFloating),
-          'input-base--with-prefix': Boolean(prefix),
+          [styles.label]: true,
+          [styles.labelFloating]: Boolean(isLabelFloating),
+          [styles.withPrefix]: Boolean(prefix),
         })}
       >
         {label}
       </label>
       <input
         className={classNames({
-          'input-base--input': true,
-          'input-base--with-prefix': Boolean(prefix),
+          [styles.input]: true,
+          [styles.withPrefix]: Boolean(prefix),
         })}
         type={type}
         value={value}

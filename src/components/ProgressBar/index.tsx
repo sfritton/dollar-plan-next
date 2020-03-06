@@ -1,5 +1,5 @@
 import React from 'react';
-import './progress-bar.css';
+import styles from './progress-bar.module.css';
 
 interface Props {
   numerator: number;
@@ -9,14 +9,14 @@ interface Props {
 
 const getProgressBarClassName = ({ numerator, denominator, danger }: Props) => {
   if (denominator <= 0 && numerator <= 0) {
-    return 'progress-bar--null';
+    return styles.null;
   }
 
   if (numerator > denominator && danger) {
-    return 'progress-bar--danger';
+    return styles.danger;
   }
 
-  return 'progress-bar--inner';
+  return styles.inner;
 };
 
 function ProgressBar(props: Props) {
@@ -27,7 +27,7 @@ function ProgressBar(props: Props) {
   const percent = Math.max(Math.min(numerator / denominator, 1), 0);
 
   return (
-    <div className="progress-bar">
+    <div className={styles.base}>
       <div className={className} style={{ transform: `scaleX(${percent})` }} />
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import './layout.css';
+import styles from './layout.module.css';
 import classNames from '../../util/classNames';
 
 interface Props {
@@ -8,25 +8,25 @@ interface Props {
 }
 
 const Grid: React.FC<Props> = ({ children, className, innerRef }) => (
-  <div ref={innerRef} className={classNames('layout--grid', className)}>
+  <div ref={innerRef} className={classNames(styles.grid, className)}>
     {children}
   </div>
 );
 
 const Header: React.FC<Props> = ({ children, className, innerRef }) => (
-  <div ref={innerRef} className={classNames('layout--header', className)}>
+  <div ref={innerRef} className={classNames(styles.header, className)}>
     {children}
   </div>
 );
 
 const Content: React.FC<Props> = ({ children, className, innerRef }) => (
-  <div ref={innerRef} className={classNames('layout--content', className)}>
+  <div ref={innerRef} className={classNames(styles.content, className)}>
     {children}
   </div>
 );
 
 const Footer: React.FC<Props> = ({ children, className, innerRef }) => (
-  <div ref={innerRef} className={classNames('layout--footer', className)}>
+  <div ref={innerRef} className={classNames(styles.footer, className)}>
     {children}
   </div>
 );

@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from '../../util/classNames';
-import './card.css';
+import styles from './card.module.css';
 
 interface Props {
   className?: string;
@@ -9,7 +9,7 @@ interface Props {
 const Card: React.FC<Props> = props => {
   const { children, className } = props;
 
-  const classList = classNames('card', className);
+  const classList = classNames(styles.card, className);
 
   return <div className={classList}>{children}</div>;
 };
@@ -19,7 +19,7 @@ export const CardClickable: React.FC<Props & {
 }> = props => {
   const { children, onClick, className } = props;
 
-  const classList = classNames('card card--btn', className);
+  const classList = classNames(styles.card, styles.cardButton, className);
 
   return (
     <a href="#" className={classList} onClick={onClick}>

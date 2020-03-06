@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import classNames from '../../util/classNames';
-import './drawer.css';
+import styles from './drawer.module.css';
 import Layout from '../Layout';
 import IconClose from '../../icons/IconClose';
 import { ButtonWithIcon } from '../Button';
@@ -45,16 +45,16 @@ const Drawer: React.FC<Props> = ({ children, isOpen, onClose, title, side = 'rig
   const drawerRef = useOnClickOutside<HTMLDivElement>(handleClickOutside);
 
   return (
-    <div className={classNames({ 'drawer--background--open': isOpen }, 'drawer--background')}>
+    <div className={classNames({ [styles.backgroundOpen]: isOpen }, styles.background)}>
       <Layout.Grid
         innerRef={drawerRef}
-        className={classNames({ 'drawer--open': isOpen, 'drawer--left': side === 'left' }, 'drawer')}
+        className={classNames({ [styles.drawerOpen]: isOpen, [styles.drawerLeft]: side === 'left' }, styles.drawer)}
       >
-        <Layout.Header className="drawer--header">
+        <Layout.Header className={styles.header}>
           {title && <h2>{title}</h2>}
           <ButtonWithIcon Icon={IconClose} label="Cancel" onClick={onClose} />
         </Layout.Header>
-        <Layout.Content className="drawer--content">{children}</Layout.Content>
+        <Layout.Content>{children}</Layout.Content>
         {Footer && (
           <Layout.Footer>
             <Footer />
