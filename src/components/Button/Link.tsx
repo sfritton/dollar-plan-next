@@ -12,7 +12,7 @@ interface Props {
 
 const LinkBase: React.FC<Props> = ({ children, small, href, className, onClick }) => (
   <Link href={href}>
-    <a className={classNames({ [styles.small]: small }, 'btn', className)} onClick={onClick}>
+    <a className={classNames({ [styles.small]: small }, styles.base, className)} onClick={onClick}>
       {children}
     </a>
   </Link>

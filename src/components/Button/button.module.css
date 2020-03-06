@@ -7,13 +7,11 @@
   padding: var(--space-x2) var(--space-x3);
   border-radius: var(--space-x1);
   font-size: var(--text-md);
-  transition: transform var(--anim-duration-long) ease;
 }
 
 .base:hover {
   cursor: pointer;
   background: var(--color-secondary-light);
-  transform: scale(1.02);
 }
 
 .base:active {
