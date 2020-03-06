@@ -1,0 +1,108 @@
+:root {
+  --color-text-light: #fff;
+  --color-text-dark: #333;
+
+  --color-primary: #0277bc;
+  --color-primary-text: var(--color-text-light);
+
+  --color-primary-light: #58a5ef;
+  --color-primary-light-text: var(--color-text-dark);
+  --color-primary-light-hover: #3c95de;
+
+  --color-primary-lighter: #9cceff;
+
+  --color-primary-dark: #004c8b;
+  --color-primary-dark-text: var(--color-text-light);
+  --color-primary-dark-hover: #015a9b;
+
+  --color-primary-darker: #003561;
+
+  --color-secondary: #c6ff00;
+  --color-secondary-text: var(--color-text-dark);
+
+  --color-secondary-light: #fdff58;
+  --color-secondary-light-text: var(--color-text-dark);
+
+  --color-secondary-dark: #90cc00;
+  --color-secondary-dark-text: var(--color-text-dark);
+
+  --color-danger: #ff1744;
+  --color-danger-text: var(--color-text-dark);
+
+  --color-danger-light: #ff616f;
+  --color-danger-light-text: var(--color-text-dark);
+
+  --color-danger-dark: #c4001d;
+  --color-danger-dark-text: var(--color-text-light);
+
+  --color-shadow: rgba(0, 0, 0, 0.25);
+  --color-null: #bbbbbb;
+
+  --space-x1: 4px;
+  --space-x2: calc(var(--space-x1) * 2);
+  --space-x3: calc(var(--space-x1) * 3);
+  --space-x4: calc(var(--space-x1) * 4);
+  --space-x5: calc(var(--space-x1) * 5);
+  --space-x6: calc(var(--space-x1) * 6);
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+
+  --anim-duration-short: 100ms;
+  --anim-duration-default: 300ms;
+  --anim-duration-long: 600ms;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  color: var(--color-primary-text);
+  background: var(--color-primary);
+  font-family: Arial;
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-size: var(--text-xl);
+}
+
+h3 {
+  font-size: var(--text-lg);
+}
+
+h2 {
+  margin-bottom: var(--space-x1);
+  display: inline-block;
+}
+
+section {
+  margin-top: var(--space-x4);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+*:focus {
+  outline: none;
+}
