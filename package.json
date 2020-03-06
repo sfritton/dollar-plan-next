@@ -1,0 +1,25 @@
+{
+  "name": "dollar-plan-next",
+  "version": "1.0.0",
+  "description": "A web app to facilitate cash-flow planning.",
+  "main": "index.js",
+  "repository": "https://github.com/sfritton/dollar-plan-next.git",
+  "author": "Sam Fritton",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^9.2.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.7",
+    "@types/react": "^16.9.23",
+    "typescript": "^3.8.3"
+  }
+}
