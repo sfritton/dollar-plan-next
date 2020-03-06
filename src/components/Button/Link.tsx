@@ -21,9 +21,9 @@ const LinkBase: React.FC<Props> = ({ children, small, href, className, onClick }
 export const LinkPrimary = LinkBase;
 
 export const LinkSecondary: React.FC<Props> = ({ className, ...restProps }) => (
-  <LinkBase {...restProps} className={classNames({}, styles.secondary, className)} />
+  <LinkBase {...restProps} className={classNames(styles.secondary, className)} />
 );
 
 export const LinkOutline: React.FC<Props> = ({ className, ...restProps }) => (
-  <LinkBase {...restProps} className={classNames({}, styles.outline, className)} />
+  <LinkBase {...restProps} className={classNames(styles.outline, className)} />
 );
