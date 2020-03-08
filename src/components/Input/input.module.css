@@ -93,7 +93,8 @@
   padding-right: 32px;
 }
 
-.select option {
+.select option,
+.select optgroup {
   color: var(--color-text-dark);
 }
 
