@@ -2,11 +2,19 @@ const getDollarNumber = (num: number) => Math.round(num / 100);
 
 export function getDollarString(num: number) {
   const dollarNumber = getDollarNumber(num);
-  return dollarNumber.toString();
+  const dollarString = dollarNumber.toString();
+
+  if (dollarString.length > 4) return dollarString;
+
+  const comma = dollarString.length - 3;
+
+  return `${dollarString.substring(0, comma)},${dollarString.substring(comma)}`;
 }
 
 export function getCentString(num: number) {
   const dollarStr = num ? num.toString() : '';
+  const comma = dollarStr.length - 5;
+  const decimal = dollarStr.length - 2;
 
   switch (dollarStr.length) {
     case 0:
@@ -15,9 +23,12 @@ export function getCentString(num: number) {
       return '0.0' + dollarStr;
     case 2:
       return '0.' + dollarStr;
+    case 3:
+    case 4:
+    case 5:
+      return `${dollarStr.substring(0, decimal)}.${dollarStr.substring(decimal)}`;
     default:
-      const decimal = dollarStr.length - 2;
-      return dollarStr.substr(0, decimal) + '.' + dollarStr.substr(decimal);
+      return `${dollarStr.substring(0, comma)},${dollarStr.substring(comma, decimal)}.${dollarStr.substring(decimal)}`;
   }
 }
 
