@@ -15,28 +15,30 @@
 
 .drawer {
   position: absolute;
+  opacity: 0;
   right: 0;
   top: 0;
   bottom: 0;
   background: var(--color-primary-dark);
   width: 100vw;
-  transform: translateX(350px);
-  transition: transform var(--anim-duration-default);
+  transform: translateX(375px);
+  transition: all var(--anim-duration-default);
 }
 
 @media (min-width: 475px) {
   .drawer {
-    width: 400px;
+    width: 375px;
   }
 }
 
 .drawerLeft {
   left: 0;
   right: auto;
-  transform: translateX(-350px);
+  transform: translateX(-375px);
 }
 
 .drawerOpen {
+  opacity: 1;
   transform: translateX(0);
 }
 
