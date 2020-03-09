@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Budget } from '../../services/types';
+import { Budget } from '../../types/budget';
 import budgetsSlice from '../budgets/slice';
 
 const initialState: Dictionary<string, Budget.GroupResponse> = {};

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Budget } from '../../services/types';
+import { Budget } from '../../types/budget';
 import { AsyncState, Status } from '../types';
 
 export interface BudgetLoaded extends Budget.Budget {
