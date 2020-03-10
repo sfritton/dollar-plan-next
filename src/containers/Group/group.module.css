@@ -1,0 +1,39 @@
+.group {
+  margin-bottom: var(--space-x4);
+}
+
+.title {
+  margin: var(--space-x2) 0;
+  min-height: 25px;
+}
+
+.titleInput {
+  font-size: var(--text-lg);
+  font-weight: bold;
+}
+
+.categoryCards {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: var(--space-x3);
+}
+
+@media (min-width: 668px) {
+  .categoryCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.categoryCards .card--btn:focus {
+  text-decoration: none;
+}
+
+.categoryCards .card--btn:focus .category-card--title {
+  text-decoration: underline;
+}
+
+.addCategoryButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

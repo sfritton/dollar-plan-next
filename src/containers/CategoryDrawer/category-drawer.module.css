@@ -1,0 +1,30 @@
+.transactions {
+  padding-bottom: var(--space-x3);
+}
+
+.amount,
+.heading {
+  margin-top: var(--space-x5);
+  margin-bottom: var(--space-x2);
+}
+
+.amount {
+  font-weight: bold;
+  font-size: var(--text-lg);
+}
+
+.amountBlock {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header {
+  padding: 0 var(--space-x3);
+  border-bottom: 1px solid var(--color-primary-light);
+}
+
+.notes {
+  margin-top: var(--space-x2);
+  font-size: var(--text-sm);
+  min-height: 20px;
+}

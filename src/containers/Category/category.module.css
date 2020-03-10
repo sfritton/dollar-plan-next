@@ -1,0 +1,43 @@
+.heading {
+  display: flex;
+  margin-bottom: var(--space-x2);
+  font-weight: bold;
+  min-height: 21px;
+}
+
+.title {
+  flex-grow: 1;
+  margin-right: var(--space-x4);
+}
+
+.titleInput {
+  width: 100%;
+}
+
+.amountInput {
+  max-width: 100px;
+}
+
+.balance {
+  display: flex;
+  font-size: var(--text-sm);
+  align-items: center;
+}
+
+.balanceMessage {
+  margin-right: var(--space-x3);
+}
+
+.notes {
+  margin-top: var(--space-x2);
+  font-size: var(--text-sm);
+  min-height: 20px;
+}
+
+.notesInput {
+  width: 100%;
+}
+
+.notesInput input {
+  font-size: var(--text-sm);
+}

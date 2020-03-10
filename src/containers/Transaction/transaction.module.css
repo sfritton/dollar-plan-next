@@ -1,0 +1,15 @@
+.transaction {
+  padding: var(--space-x3);
+  border-bottom: 1px solid var(--color-primary-light);
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  margin-bottom: var(--space-x2);
+  font-size: var(--text-sm);
+  color: var(--color-primary-lighter);
+}

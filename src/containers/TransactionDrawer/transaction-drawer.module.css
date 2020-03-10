@@ -1,0 +1,48 @@
+.inputCard {
+  display: flex;
+  border-bottom: 1px solid var(--color-primary-light);
+}
+
+.inputCardInputs {
+  padding: var(--space-x6) var(--space-x2) var(--space-x6) var(--space-x4);
+}
+
+.inputCardFirstRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-x3);
+}
+
+.dateInput,
+.amountInput {
+  flex-basis: 45%;
+  flex-grow: 1;
+}
+
+.dateInput {
+  margin-right: var(--space-x3);
+}
+
+.categorySelect {
+  width: 100%;
+  margin-bottom: var(--space-x3);
+}
+
+.descriptionInput {
+  width: 100%;
+}
+
+.addAnother {
+  margin-bottom: var(--space-x6);
+  padding-left: var(--space-x4);
+}
+
+.deleteButton {
+  margin: 0;
+  border-radius: 0;
+  padding: var(--space-x3);
+}
+
+.deleteButton:hover {
+  transform: none;
+}
