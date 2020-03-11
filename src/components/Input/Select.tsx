@@ -13,7 +13,7 @@ interface Props {
 
 const Select: React.FC<Props> = ({ className = '', children, defaultValue, label, onChange, value }) => (
   <div className={classNames(styles.base, className)}>
-    <label className={classNames(styles.base, styles.label, styles.labelFloating)}>{label}</label>
+    <label className={classNames(styles.label, styles.labelFloating)}>{label}</label>
     <select className={styles.select} value={value} defaultValue={defaultValue} onChange={onChange}>
       {children}
     </select>

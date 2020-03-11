@@ -31,12 +31,7 @@ function Header(props: Props) {
         {budget && (
           <>
             {isAdjustingBudget ? (
-              <ButtonWithIcon
-                className={styles.leftButton}
-                Icon={IconClose}
-                label="Cancel"
-                onClick={() => setIsAdjustingBudget(false)}
-              />
+              <ButtonWithIcon Icon={IconClose} label="Cancel" onClick={() => setIsAdjustingBudget(false)} />
             ) : (
               <BudgetDrawer budgetId={budgetId} />
             )}

@@ -33,7 +33,7 @@ interface ButtonWithIconProps extends Props {
 export const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({ className, Icon, label, ...restProps }) => (
   <ButtonBase {...restProps} className={classNames(styles.secondary, styles.withIcon, className)}>
     <Icon size={32} className={styles.icon} />
-    <span className={styles.iconLabel}>{label}</span>
+    <span className={styles.label}>{label}</span>
   </ButtonBase>
 );
 

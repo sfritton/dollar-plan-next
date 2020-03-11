@@ -7,7 +7,6 @@ import Drawer from '../../../components/Drawer';
 import fetchBudgetsAction from '../../../state/budgets/fetchBudgets';
 import { Status } from '../../../state/types';
 import styles from './budget-drawer.module.css';
-import headerStyles from '../header.module.css';
 import BudgetButton from './BudgetButton';
 import Footer from './Footer';
 import { useAction } from '../../../state/hooks';
@@ -34,12 +33,7 @@ function BudgetDrawer(props: Props) {
 
   return (
     <>
-      <ButtonWithIcon
-        Icon={IconCalendar}
-        label="Switch budget"
-        onClick={() => setIsOpen(true)}
-        className={headerStyles.leftButton}
-      />
+      <ButtonWithIcon Icon={IconCalendar} label="Switch budget" onClick={() => setIsOpen(true)} />
       <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} side="left" title="Choose a budget" Footer={Footer}>
         <ul className={styles.budgetDrawer}>
           {budgetIds.map(id => (

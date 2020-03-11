@@ -7,12 +7,9 @@
   align-items: flex-end;
 }
 
-.leftButton {
-  margin-right: var(--space-x1);
-}
-
 .title {
   flex-grow: 1;
+  margin-left: var(--space-x3);
 }
 
 .subheader {
