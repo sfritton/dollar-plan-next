@@ -4,3 +4,7 @@
   margin: 0 auto;
   max-width: calc(900px + var(--space-x3) * 2);
 }
+
+.addButton {
+  margin-top: var(--space-x4);
+}

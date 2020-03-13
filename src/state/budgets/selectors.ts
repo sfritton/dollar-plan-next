@@ -36,8 +36,8 @@ export const makeGetActualBalance = (budgetId: number | string) => (state: AppSt
 
   if (!budget || budget.status !== Status.SUCCESS) return undefined;
 
-  const totalIncome = budget.incomeIds.reduce((sum, id) => sum + makeGetActualAmount(id)(state), 0);
-  const totalExpenses = budget.expenseIds.reduce((sum, id) => sum + makeGetActualAmount(id)(state), 0);
+  const totalIncome = budget.incomeIds.reduce<number>((sum, id) => sum + makeGetActualAmount(id)(state), 0);
+  const totalExpenses = budget.expenseIds.reduce<number>((sum, id) => sum + makeGetActualAmount(id)(state), 0);
 
   return totalIncome - totalExpenses;
 };
@@ -47,8 +47,8 @@ export const makeGetPlannedBalance = (budgetId: number | string) => (state: AppS
 
   if (!budget || budget.status !== Status.SUCCESS) return undefined;
 
-  const totalIncome = budget.incomeIds.reduce((sum, id) => sum + makeGetPlannedAmount(id)(state), 0);
-  const totalExpenses = budget.expenseIds.reduce((sum, id) => sum + makeGetPlannedAmount(id)(state), 0);
+  const totalIncome = budget.incomeIds.reduce<number>((sum, id) => sum + makeGetPlannedAmount(id)(state), 0);
+  const totalExpenses = budget.expenseIds.reduce<number>((sum, id) => sum + makeGetPlannedAmount(id)(state), 0);
 
   return totalIncome - totalExpenses;
 };

@@ -3,13 +3,14 @@ import { AppState, Status } from '../../state/types';
 import { makeGetGroup } from '../../state/groups/selectors';
 import { Budget } from '../../types/budget';
 import { makeGetCategory } from '../../state/categories/selectors';
+import { GroupState } from '../../state/groups/types';
 
 export const makeGetCategoryOptions = (budgetId: number | string) => (state: AppState) => {
   const budget = makeGetBudget(budgetId)(state);
 
   if (!budget || budget.status !== Status.SUCCESS) return undefined;
 
-  const groups = [...budget.incomeIds, ...budget.expenseIds].reduce<Budget.GroupResponse[]>((acc, id) => {
+  const groups = [...budget.incomeIds, ...budget.expenseIds].reduce<GroupState[]>((acc, id) => {
     const group = makeGetGroup(id)(state);
 
     if (!group) return acc;
@@ -18,6 +19,7 @@ export const makeGetCategoryOptions = (budgetId: number | string) => (state: App
   }, []);
 
   return groups.map(group => ({
+    id: group.id,
     title: group.title,
     categories: group.categoryIds.reduce<Pick<Budget.Group, 'title' | 'id'>[]>((acc, id) => {
       const category = makeGetCategory(id)(state);

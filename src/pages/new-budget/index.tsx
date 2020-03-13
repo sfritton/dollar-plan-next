@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
+import Router from 'next/router';
 import styles from './new-budget.module.css';
 import { Select } from '../../components/Input';
 import { ButtonPrimary } from '../../components/Button';
@@ -12,6 +13,12 @@ const nextTenYears = [...new Array(10)].map((_, i) => currentYear + i);
 const NewBudgetPage: NextPage = () => {
   const [chosenMonth, setChosenMonth] = useState(1);
   const [chosenYear, setChosenYear] = useState(currentYear);
+
+  const handleCreateBudget = useCallback(async () => {
+    const { id } = await CreateBudget({ month: chosenMonth, year: chosenYear });
+
+    Router.push(`/budget/${id}?adjusting=true`);
+  }, [chosenMonth, chosenYear]);
 
   return (
     <div className={styles.page}>
@@ -33,7 +40,7 @@ const NewBudgetPage: NextPage = () => {
             ))}
           </Select>
         </div>
-        <ButtonPrimary onClick={() => CreateBudget({ month: chosenMonth, year: chosenYear })} className={styles.button}>
+        <ButtonPrimary onClick={handleCreateBudget} className={styles.button}>
           Create budget
         </ButtonPrimary>
       </div>

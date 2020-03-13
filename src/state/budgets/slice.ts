@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Budget } from '../../types/budget';
 import { AsyncState, Status } from '../types';
+import { GroupId } from '../groups/types';
 
 export interface BudgetLoaded extends Budget.Budget {
   error?: string;
   status: Status.SUCCESS;
-  incomeIds: number[];
-  expenseIds: number[];
+  incomeIds: GroupId[];
+  expenseIds: GroupId[];
 }
 
 export interface BudgetUnloaded extends Budget.Budget {
@@ -96,6 +97,17 @@ const budgetsSlice = createSlice({
         status: Status.FAILURE,
         error,
       };
+    },
+    addGroup: (state, action: PayloadAction<{ budget_id: number; is_income: boolean; id: string }>) => {
+      const budget = state.idMap[action.payload.budget_id];
+
+      if (!budget || budget.status !== Status.SUCCESS) return;
+
+      if (action.payload.is_income) {
+        budget.incomeIds = [...budget.incomeIds, action.payload.id];
+      } else {
+        budget.expenseIds = [...budget.expenseIds, action.payload.id];
+      }
     },
   },
 });

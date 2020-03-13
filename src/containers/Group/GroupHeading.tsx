@@ -5,10 +5,11 @@ import { getIsAdjustingBudget } from '../../state/ui/selectors';
 import styles from './group.module.css';
 import { useAction } from '../../state/hooks';
 import groupsSlice from '../../state/groups/slice';
+import { GroupId } from '../../state/groups/types';
 
 interface Props {
   title: string;
-  id: number;
+  id: GroupId;
 }
 
 function GroupHeading(props: Props) {

@@ -9,6 +9,7 @@ import { makeGetBudget } from '../../state/budgets/selectors';
 import Header from '../../containers/Header';
 import BudgetPageContent from '../../containers/BudgetPageContent';
 import Layout from '../../components/Layout';
+import uiSlice from '../../state/ui/slice';
 
 const BudgetPage: NextPage = () => {
   const router = useRouter();
@@ -19,7 +20,16 @@ const BudgetPage: NextPage = () => {
   const budget = useSelector(getBudget);
   const fetchBudget = useAction(fetchBudgetAction);
 
+  const adjusting = router.query.adjusting;
+  const setIsAdjustingBudget = useAction(uiSlice.actions.setIsAdjustingBudget);
+
   useEffect(() => {
+    if (adjusting) setIsAdjustingBudget(true);
+  }, [adjusting]);
+
+  useEffect(() => {
+    if (typeof budgetId === 'undefined') return;
+
     if (!budget || budget.status === Status.INIT) {
       fetchBudget(budgetId);
     }

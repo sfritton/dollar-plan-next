@@ -6,9 +6,10 @@ import styles from './group.module.css';
 import Category from '../Category';
 import { getIsAdjustingBudget } from '../../state/ui/selectors';
 import { CardClickable } from '../../components/Card';
+import { GroupId } from '../../state/groups/types';
 
 interface Props {
-  groupId: number;
+  groupId: GroupId;
   noTitle?: boolean;
 }
 

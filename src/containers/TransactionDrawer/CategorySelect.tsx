@@ -16,8 +16,8 @@ const CategorySelect: React.FC = () => {
 
   return (
     <Select label="Category" className={styles.categorySelect}>
-      {categoryOptions.map(({ title, categories }) => (
-        <optgroup key={title} label={title}>
+      {categoryOptions.map(({ id, title, categories }) => (
+        <optgroup key={id} label={title}>
           {categories.map(({ title: catTitle, id }) => (
             <option key={id} value={id}>
               {catTitle}
