@@ -1,0 +1,35 @@
+.page {
+  min-height: 100vh;
+  background: var(--color-primary-dark);
+  text-align: center;
+}
+
+.container {
+  max-width: 400px;
+  padding: var(--space-x6);
+  margin: 0 auto;
+}
+
+.instructions {
+  font-size: var(--text-lg);
+}
+
+.selectContainer {
+  margin: var(--space-x4) 0;
+  display: flex;
+  justify-content: center;
+}
+
+.select {
+  display: inline-block;
+  flex-basis: 50%;
+}
+
+.select:first-of-type {
+  margin-right: var(--space-x4);
+}
+
+.button {
+  display: block;
+  width: 100%;
+}

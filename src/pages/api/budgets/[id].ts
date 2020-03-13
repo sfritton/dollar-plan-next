@@ -3,8 +3,11 @@ import { Budget } from '../../../types/budget';
 import { NOT_FOUND_MESSAGE } from '../../../queries/constants';
 import { getBudgetById } from '../../../queries/getBudgetById';
 import { ErrorResponse } from '../../../types/errorResponse';
+import apiWrongMethod from '../../../util/apiWrongMethod';
 
 export default async (req: NextApiRequest, res: NextApiResponse<Budget.BudgetResponse | ErrorResponse>) => {
+  if (req.method !== 'GET') return apiWrongMethod(req, res);
+
   const id = req.query.id;
 
   if (Array.isArray(id)) {
