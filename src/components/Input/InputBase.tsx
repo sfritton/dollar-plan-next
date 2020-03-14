@@ -18,7 +18,9 @@ const InputBase: React.FC<InputProps & {
   prefix?: string;
   min?: string;
 }> = ({ className = '', defaultValue, prefix, label, onChange, placeholder, type, value, min }) => {
-  const [isLabelFloating, setIsLabelFloating] = useState(Boolean(placeholder || defaultValue || value));
+  const [isLabelFloating, setIsLabelFloating] = useState(
+    Boolean(placeholder || defaultValue || value),
+  );
 
   const handleChange = useCallback<OnChangeHandler>(
     event => {

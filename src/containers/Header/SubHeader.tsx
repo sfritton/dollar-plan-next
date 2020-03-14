@@ -4,7 +4,11 @@ import { useRouter } from 'next/router';
 import classNames from '../../util/classNames';
 import { hasMonthStarted, hasMonthEnded, getDaysLeft } from '../../util/date';
 import { BudgetWithMetadata } from '../../state/budgets/slice';
-import { makeGetActualBalance, makeGetPlannedBalance, makeGetIsBalanced } from '../../state/budgets/selectors';
+import {
+  makeGetActualBalance,
+  makeGetPlannedBalance,
+  makeGetIsBalanced,
+} from '../../state/budgets/selectors';
 import styles from './header.module.css';
 import { getDollarString } from '../../util/currency';
 import { getIsAdjustingBudget } from '../../state/ui/selectors';
@@ -62,7 +66,12 @@ function SubHeader(props: Props) {
   if (!budget) return <div className={styles.subheader} />;
 
   return (
-    <div className={classNames({ [styles.subheaderUnbalanced]: isBalanced === false }, styles.subheader)}>
+    <div
+      className={classNames(
+        { [styles.subheaderUnbalanced]: isBalanced === false },
+        styles.subheader,
+      )}
+    >
       <span>{balanceMessage}</span>
       {isBalanced && <span>{getDaysLeftMessage(budget)}</span>}
     </div>

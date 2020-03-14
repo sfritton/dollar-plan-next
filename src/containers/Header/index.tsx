@@ -31,7 +31,11 @@ function Header(props: Props) {
         {budget && (
           <>
             {isAdjustingBudget ? (
-              <ButtonWithIcon Icon={IconClose} label="Cancel" onClick={() => setIsAdjustingBudget(false)} />
+              <ButtonWithIcon
+                Icon={IconClose}
+                label="Cancel"
+                onClick={() => setIsAdjustingBudget(false)}
+              />
             ) : (
               <BudgetDrawer budgetId={budgetId} />
             )}
@@ -39,9 +43,17 @@ function Header(props: Props) {
               {getMonthName(budget.month)} {budget.year}
             </h1>
             {isAdjustingBudget ? (
-              <ButtonWithIcon Icon={IconSave} label="Save changes" onClick={() => setIsAdjustingBudget(false)} />
+              <ButtonWithIcon
+                Icon={IconSave}
+                label="Save changes"
+                onClick={() => setIsAdjustingBudget(false)}
+              />
             ) : (
-              <ButtonWithIcon Icon={IconAdjust} label="Adjust budget" onClick={() => setIsAdjustingBudget(true)} />
+              <ButtonWithIcon
+                Icon={IconAdjust}
+                label="Adjust budget"
+                onClick={() => setIsAdjustingBudget(true)}
+              />
             )}
           </>
         )}

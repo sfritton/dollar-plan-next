@@ -1,7 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getDollarString } from '../../util/currency';
-import { getIsCategoryDrawerOpen, getIsCategoryDrawerIncome, getCategoryDrawerId } from '../../state/ui/selectors';
+import {
+  getIsCategoryDrawerOpen,
+  getIsCategoryDrawerIncome,
+  getCategoryDrawerId,
+} from '../../state/ui/selectors';
 import uiSlice from '../../state/ui/slice';
 import Drawer from '../../components/Drawer';
 import CategoryBalance from '../Category/CategoryBalance';
@@ -23,7 +27,12 @@ function CategoryDrawer() {
   const { title, transactionIds } = category || {};
 
   return (
-    <Drawer title={title} isOpen={isOpen && Boolean(category)} onClose={closeDrawer} Footer={Footer}>
+    <Drawer
+      title={title}
+      isOpen={isOpen && Boolean(category)}
+      onClose={closeDrawer}
+      Footer={Footer}
+    >
       {category && (
         <>
           <div className={styles.header}>
@@ -31,7 +40,11 @@ function CategoryDrawer() {
               <h3 className={styles.heading}>Planned amount</h3>
               <div className={styles.amount}>${getDollarString(category.planned_amount)}</div>
             </div>
-            <CategoryBalance plannedAmount={category.planned_amount} actualAmount={actualAmount} isIncome={isIncome} />
+            <CategoryBalance
+              plannedAmount={category.planned_amount}
+              actualAmount={actualAmount}
+              isIncome={isIncome}
+            />
             {category.notes && (
               <>
                 <h3 className={styles.header}>Notes</h3>

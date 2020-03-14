@@ -97,7 +97,10 @@ const budgetsSlice = createSlice({
         error,
       };
     },
-    addGroup: (state, action: PayloadAction<{ budget_id: Budget.Id; is_income: boolean; id: Budget.Id }>) => {
+    addGroup: (
+      state,
+      action: PayloadAction<{ budget_id: Budget.Id; is_income: boolean; id: Budget.Id }>,
+    ) => {
       const budget = state.idMap[action.payload.budget_id];
 
       if (!budget || budget.status !== Status.SUCCESS) return;

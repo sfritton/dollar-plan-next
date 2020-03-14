@@ -2,7 +2,8 @@ import { AppState } from '../types';
 
 export const getIsAdjustingBudget = (state: AppState) => state.ui.isAdjustingBudget;
 
-export const getIsEditingTransactions = (state: AppState) => state.ui.categoryDrawer.isEditingTransactions;
+export const getIsEditingTransactions = (state: AppState) =>
+  state.ui.categoryDrawer.isEditingTransactions;
 
 export const getIsCategoryDrawerOpen = (state: AppState) => state.ui.categoryDrawer.isOpen;
 

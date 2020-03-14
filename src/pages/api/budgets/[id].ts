@@ -5,7 +5,10 @@ import { getBudgetById } from '../../../queries/getBudgetById';
 import { ErrorResponse } from '../../../types/errorResponse';
 import apiWrongMethod from '../../../util/apiWrongMethod';
 
-export default async (req: NextApiRequest, res: NextApiResponse<Budget.BudgetResponse | ErrorResponse>) => {
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse<Budget.BudgetResponse | ErrorResponse>,
+) => {
   if (req.method !== 'GET') return apiWrongMethod(req, res);
 
   const id = req.query.id;

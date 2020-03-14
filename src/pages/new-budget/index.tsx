@@ -25,14 +25,22 @@ const NewBudgetPage: NextPage = () => {
       <div className={styles.container}>
         <div className={styles.instructions}>Select a month and year for the new budget</div>
         <div className={styles.selectContainer}>
-          <Select label="Month" className={styles.select} onChange={e => setChosenMonth(e.target.value)}>
+          <Select
+            label="Month"
+            className={styles.select}
+            onChange={e => setChosenMonth(e.target.value)}
+          >
             {months.map((month, i) => (
               <option key={month} value={i + 1}>
                 {month}
               </option>
             ))}
           </Select>
-          <Select label="Year" className={styles.select} onChange={e => setChosenYear(e.target.value)}>
+          <Select
+            label="Year"
+            className={styles.select}
+            onChange={e => setChosenYear(e.target.value)}
+          >
             {nextTenYears.map(year => (
               <option key={year} value={year}>
                 {year}

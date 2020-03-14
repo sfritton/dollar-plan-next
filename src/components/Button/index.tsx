@@ -10,7 +10,10 @@ interface Props {
 }
 
 const ButtonBase: React.FC<Props> = ({ children, small, onClick, className }) => (
-  <button className={classNames({ [styles.small]: small }, styles.base, className)} onClick={onClick}>
+  <button
+    className={classNames({ [styles.small]: small }, styles.base, className)}
+    onClick={onClick}
+  >
     {children}
   </button>
 );
@@ -30,14 +33,24 @@ interface ButtonWithIconProps extends Props {
   label: string;
 }
 
-export const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({ className, Icon, label, ...restProps }) => (
+export const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({
+  className,
+  Icon,
+  label,
+  ...restProps
+}) => (
   <ButtonBase {...restProps} className={classNames(styles.secondary, styles.withIcon, className)}>
     <Icon size={32} className={styles.icon} />
     <span className={styles.label}>{label}</span>
   </ButtonBase>
 );
 
-export const ButtonFloatingAction: React.FC<ButtonWithIconProps> = ({ className, Icon, label, ...restProps }) => (
+export const ButtonFloatingAction: React.FC<ButtonWithIconProps> = ({
+  className,
+  Icon,
+  label,
+  ...restProps
+}) => (
   <ButtonBase {...restProps} className={classNames(styles.floatingAction, className)}>
     <Icon />
     <div className={styles.floatingActionLabel}>{label}</div>

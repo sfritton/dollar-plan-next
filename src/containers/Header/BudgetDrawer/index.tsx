@@ -34,10 +34,21 @@ function BudgetDrawer(props: Props) {
   return (
     <>
       <ButtonWithIcon Icon={IconCalendar} label="Switch budget" onClick={() => setIsOpen(true)} />
-      <Drawer isOpen={isOpen} onClose={() => setIsOpen(false)} side="left" title="Choose a budget" Footer={Footer}>
+      <Drawer
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        side="left"
+        title="Choose a budget"
+        Footer={Footer}
+      >
         <ul className={styles.budgetDrawer}>
           {budgetIds.map(id => (
-            <BudgetButton id={id} key={id} isCurrent={String(id) === budgetId} onClick={() => setIsOpen(false)} />
+            <BudgetButton
+              id={id}
+              key={id}
+              isCurrent={String(id) === budgetId}
+              onClick={() => setIsOpen(false)}
+            />
           ))}
         </ul>
       </Drawer>

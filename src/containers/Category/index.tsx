@@ -38,7 +38,11 @@ function Category(props: Props) {
   return (
     <Tag onClick={handleClick}>
       <CategoryHeading id={categoryId} title={title} amount={planned_amount} />
-      <CategoryBalance plannedAmount={planned_amount} actualAmount={actualAmount} isIncome={isIncome} />
+      <CategoryBalance
+        plannedAmount={planned_amount}
+        actualAmount={actualAmount}
+        isIncome={isIncome}
+      />
       <CategoryNotes id={categoryId} notes={notes} />
     </Tag>
   );

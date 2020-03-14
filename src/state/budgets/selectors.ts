@@ -6,13 +6,15 @@ import { Budget } from '../../types/budget';
 
 export const getStatus = (state: AppState) => state.budgets.status;
 
-export const makeGetBudgetStatus = (id: string) => (state: AppState) => (state.budgets.idMap[id] || {}).status;
+export const makeGetBudgetStatus = (id: string) => (state: AppState) =>
+  (state.budgets.idMap[id] || {}).status;
 
 export const getBudgetIds = (state: AppState) => state.budgets.ids;
 
 export const getHasBudgets = (state: AppState) => getBudgetIds(state).length > 0;
 
-export const makeGetBudget = (budgetId: Budget.Id) => (state: AppState) => state.budgets.idMap[budgetId];
+export const makeGetBudget = (budgetId: Budget.Id) => (state: AppState) =>
+  state.budgets.idMap[budgetId];
 
 export const makeSelectBudgetMonth = (budgetId: Budget.Id) =>
   createSelector(makeGetBudget(budgetId), budget => {
@@ -37,8 +39,14 @@ export const makeGetActualBalance = (budgetId: Budget.Id) => (state: AppState) =
 
   if (!budget || budget.status !== Status.SUCCESS) return undefined;
 
-  const totalIncome = budget.incomeIds.reduce<number>((sum, id) => sum + makeGetActualAmount(id)(state), 0);
-  const totalExpenses = budget.expenseIds.reduce<number>((sum, id) => sum + makeGetActualAmount(id)(state), 0);
+  const totalIncome = budget.incomeIds.reduce<number>(
+    (sum, id) => sum + makeGetActualAmount(id)(state),
+    0,
+  );
+  const totalExpenses = budget.expenseIds.reduce<number>(
+    (sum, id) => sum + makeGetActualAmount(id)(state),
+    0,
+  );
 
   return totalIncome - totalExpenses;
 };
@@ -48,8 +56,14 @@ export const makeGetPlannedBalance = (budgetId: Budget.Id) => (state: AppState) 
 
   if (!budget || budget.status !== Status.SUCCESS) return undefined;
 
-  const totalIncome = budget.incomeIds.reduce<number>((sum, id) => sum + makeGetPlannedAmount(id)(state), 0);
-  const totalExpenses = budget.expenseIds.reduce<number>((sum, id) => sum + makeGetPlannedAmount(id)(state), 0);
+  const totalIncome = budget.incomeIds.reduce<number>(
+    (sum, id) => sum + makeGetPlannedAmount(id)(state),
+    0,
+  );
+  const totalExpenses = budget.expenseIds.reduce<number>(
+    (sum, id) => sum + makeGetPlannedAmount(id)(state),
+    0,
+  );
 
   return totalIncome - totalExpenses;
 };

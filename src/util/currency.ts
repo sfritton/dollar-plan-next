@@ -28,7 +28,10 @@ export function getCentString(num: number) {
     case 5:
       return `${dollarStr.substring(0, decimal)}.${dollarStr.substring(decimal)}`;
     default:
-      return `${dollarStr.substring(0, comma)},${dollarStr.substring(comma, decimal)}.${dollarStr.substring(decimal)}`;
+      return `${dollarStr.substring(0, comma)},${dollarStr.substring(
+        comma,
+        decimal,
+      )}.${dollarStr.substring(decimal)}`;
   }
 }
 

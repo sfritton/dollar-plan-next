@@ -48,7 +48,10 @@ const Drawer: React.FC<Props> = ({ children, isOpen, onClose, title, side = 'rig
     <div className={classNames({ [styles.backgroundOpen]: isOpen }, styles.background)}>
       <Layout.Grid
         innerRef={drawerRef}
-        className={classNames({ [styles.drawerOpen]: isOpen, [styles.drawerLeft]: side === 'left' }, styles.drawer)}
+        className={classNames(
+          { [styles.drawerOpen]: isOpen, [styles.drawerLeft]: side === 'left' },
+          styles.drawer,
+        )}
       >
         <Layout.Header className={styles.header}>
           {title && <h2>{title}</h2>}

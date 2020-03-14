@@ -51,7 +51,8 @@ export const getLastDayOfMonth = (date: SimpleDate) => {
 };
 
 // returns the number of days between two dates
-export const compareDates = (date1: Date, date2: Date) => Math.floor((date2.getTime() - date1.getTime()) / ONE_DAY);
+export const compareDates = (date1: Date, date2: Date) =>
+  Math.floor((date2.getTime() - date1.getTime()) / ONE_DAY);
 
 export const compareToToday = (date: Date) => compareDates(new Date(), date);
 

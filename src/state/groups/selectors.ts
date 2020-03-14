@@ -12,7 +12,10 @@ export const makeGetActualAmount = (id: Budget.Id) => (state: AppState) => {
 
   if (!group) return 0;
 
-  return group.categoryIds.reduce<number>((sum, categoryId) => sum + makeGetCategoryActualAmount(categoryId)(state), 0);
+  return group.categoryIds.reduce<number>(
+    (sum, categoryId) => sum + makeGetCategoryActualAmount(categoryId)(state),
+    0,
+  );
 };
 
 export const makeGetPlannedAmount = (id: Budget.Id) => (state: AppState) => {

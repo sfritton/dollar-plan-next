@@ -4,7 +4,10 @@ import { getAllBudgets } from '../../../queries/getAllBudgets';
 import { ErrorResponse } from '../../../types/errorResponse';
 import apiWrongMethod from '../../../util/apiWrongMethod';
 
-export default async (req: NextApiRequest, res: NextApiResponse<Budget.Budget[] | ErrorResponse>) => {
+export default async (
+  req: NextApiRequest,
+  res: NextApiResponse<Budget.Budget[] | ErrorResponse>,
+) => {
   if (req.method !== 'GET') return apiWrongMethod(req, res);
 
   try {

@@ -35,7 +35,11 @@ function BudgetPageContent(props: Props) {
         ))}
         {isAdjustingBudget && (
           <div className={styles.addButton}>
-            <ButtonPrimary onClick={() => addGroup({ budget_id: budget.id, is_income: true, id: uniqueId('group') })}>
+            <ButtonPrimary
+              onClick={() =>
+                addGroup({ budget_id: budget.id, is_income: true, id: uniqueId('group') })
+              }
+            >
               Add an income group
             </ButtonPrimary>
           </div>
@@ -48,13 +52,19 @@ function BudgetPageContent(props: Props) {
         ))}
         {isAdjustingBudget && (
           <div className={styles.addButton}>
-            <ButtonPrimary onClick={() => addGroup({ budget_id: budget.id, is_income: false, id: uniqueId('group') })}>
+            <ButtonPrimary
+              onClick={() =>
+                addGroup({ budget_id: budget.id, is_income: false, id: uniqueId('group') })
+              }
+            >
               Add an expense group
             </ButtonPrimary>
           </div>
         )}
       </section>
-      {!isAdjustingBudget && <ButtonFloatingAction Icon={IconAdd} label="Add transactions" onClick={openDrawer} />}
+      {!isAdjustingBudget && (
+        <ButtonFloatingAction Icon={IconAdd} label="Add transactions" onClick={openDrawer} />
+      )}
       <CategoryDrawer />
       <TransactionDrawer />
     </div>

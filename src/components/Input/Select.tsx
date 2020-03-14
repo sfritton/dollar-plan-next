@@ -11,7 +11,14 @@ interface Props {
   value?: string;
 }
 
-const Select: React.FC<Props> = ({ className = '', children, defaultValue, label, onChange, value }) => (
+const Select: React.FC<Props> = ({
+  className = '',
+  children,
+  defaultValue,
+  label,
+  onChange,
+  value,
+}) => (
   <div className={classNames(styles.base, className)}>
     <label className={classNames(styles.label, styles.labelFloating)}>{label}</label>
     <select className={styles.select} value={value} defaultValue={defaultValue} onChange={onChange}>

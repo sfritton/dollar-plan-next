@@ -23,7 +23,8 @@ export default function BudgetButton(props: Props) {
     <li>
       <Link href={`/budget/${id}`}>
         <a className={styles.button} onClick={onClick}>
-          {getMonthName(budget.month)} {budget.year} {isCurrent && <span className={styles.currentLabel}>current</span>}
+          {getMonthName(budget.month)} {budget.year}{' '}
+          {isCurrent && <span className={styles.currentLabel}>current</span>}
         </a>
       </Link>
     </li>
