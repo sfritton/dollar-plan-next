@@ -1,6 +1,6 @@
 import { Budget } from '../../types/budget';
 
-export interface StateGroup extends Budget.GroupResponse {
+export interface StateCategory extends Budget.CategoryResponse {
   isNew?: boolean;
   isUpdated?: boolean;
 }

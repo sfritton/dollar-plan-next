@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Budget } from '../../types/budget';
 
 interface CategoryDrawerState {
   isOpen: boolean;
   isEditingTransactions: boolean;
-  id?: number;
+  id?: Budget.Id;
   isIncome?: boolean;
 }
 
@@ -18,6 +19,7 @@ const initialState: UiState = {
   isTransactionDrawerOpen: false,
   categoryDrawer: { isOpen: false, isEditingTransactions: false },
 };
+
 export const name = 'ui' as const;
 
 const uiSlice = createSlice({

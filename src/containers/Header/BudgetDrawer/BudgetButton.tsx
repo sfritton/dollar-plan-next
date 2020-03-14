@@ -4,9 +4,10 @@ import Link from 'next/link';
 import styles from './budget-drawer.module.css';
 import { makeGetBudget } from '../../../state/budgets/selectors';
 import { getMonthName } from '../../../util/date';
+import { Budget } from '../../../types/budget';
 
 interface Props {
-  id: number;
+  id: Budget.Id;
   isCurrent?: boolean;
   onClick: AnyFunction;
 }

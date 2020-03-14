@@ -1,9 +1,10 @@
 import { AppState } from '../types';
 import { makeGetTransaction } from '../transactions/selectors';
+import { Budget } from '../../types/budget';
 
-export const makeGetCategory = (id: number) => (state: AppState) => state.categories[id];
+export const makeGetCategory = (id: Budget.Id) => (state: AppState) => state.categories[id];
 
-export const makeGetActualAmount = (id: number) => (state: AppState) => {
+export const makeGetActualAmount = (id: Budget.Id) => (state: AppState) => {
   const category = makeGetCategory(id)(state);
 
   if (!category) return 0;
@@ -13,7 +14,7 @@ export const makeGetActualAmount = (id: number) => (state: AppState) => {
   return transactions.reduce((sum, transaction) => sum + (transaction ? transaction.amount : 0), 0);
 };
 
-export const makeGetPlannedAmount = (id: number) => (state: AppState) => {
+export const makeGetPlannedAmount = (id: Budget.Id) => (state: AppState) => {
   const category = makeGetCategory(id)(state);
 
   if (!category) return 0;

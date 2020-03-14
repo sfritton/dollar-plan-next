@@ -1,13 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Budget } from '../../types/budget';
 import { AsyncState, Status } from '../types';
-import { GroupId } from '../groups/types';
 
 export interface BudgetLoaded extends Budget.Budget {
   error?: string;
   status: Status.SUCCESS;
-  incomeIds: GroupId[];
-  expenseIds: GroupId[];
+  incomeIds: Budget.Id[];
+  expenseIds: Budget.Id[];
 }
 
 export interface BudgetUnloaded extends Budget.Budget {
@@ -18,7 +17,7 @@ export interface BudgetUnloaded extends Budget.Budget {
 export type BudgetWithMetadata = BudgetLoaded | BudgetUnloaded;
 
 interface BudgetState extends AsyncState {
-  ids: number[];
+  ids: Budget.Id[];
   idMap: Dictionary<string, BudgetWithMetadata>;
 }
 
@@ -37,7 +36,7 @@ const budgetsSlice = createSlice({
     addBudgetsSuccess: (
       state,
       action: PayloadAction<{
-        ids: number[];
+        ids: Budget.Id[];
         idMap: Record<string, BudgetWithMetadata>;
       }>,
     ) => {
@@ -98,7 +97,7 @@ const budgetsSlice = createSlice({
         error,
       };
     },
-    addGroup: (state, action: PayloadAction<{ budget_id: number; is_income: boolean; id: string }>) => {
+    addGroup: (state, action: PayloadAction<{ budget_id: Budget.Id; is_income: boolean; id: Budget.Id }>) => {
       const budget = state.idMap[action.payload.budget_id];
 
       if (!budget || budget.status !== Status.SUCCESS) return;

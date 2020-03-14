@@ -5,9 +5,10 @@ import { makeSelectBudgetMonth } from '../../state/budgets/selectors';
 import { getMonthNameShort } from '../../util/date';
 import TransactionDetails from './TransactionDetails';
 import styles from './transaction.module.css';
+import { Budget } from '../../types/budget';
 
 interface Props {
-  id: number;
+  id: Budget.Id;
 }
 
 export default function Transaction(props: Props) {

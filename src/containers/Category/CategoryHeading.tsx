@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './category.module.css';
+import { Budget } from '../../types/budget';
 import { getDollarString } from '../../util/currency';
 import { InputText, InputDollar } from '../../components/Input';
 import { useSelector } from 'react-redux';
@@ -10,7 +11,7 @@ import { useAction } from '../../state/hooks';
 interface Props {
   title: string;
   amount: number;
-  id: number;
+  id: Budget.Id;
 }
 
 const CategoryHeading = ({ title, amount, id }: Props) => {

@@ -1,19 +1,17 @@
-import React, { useCallback } from "react";
-import {
-  makeGetCategory,
-  makeGetActualAmount
-} from "../../state/categories/selectors";
-import { useSelector } from "react-redux";
-import Card, { CardClickable } from "../../components/Card";
-import CategoryHeading from "./CategoryHeading";
-import CategoryBalance from "./CategoryBalance";
-import CategoryNotes from "./CategoryNotes";
-import { getIsAdjustingBudget } from "../../state/ui/selectors";
-import uiSlice from "../../state/ui/slice";
-import { useAction } from "../../state/hooks";
+import React, { useCallback } from 'react';
+import { makeGetCategory, makeGetActualAmount } from '../../state/categories/selectors';
+import { useSelector } from 'react-redux';
+import Card, { CardClickable } from '../../components/Card';
+import CategoryHeading from './CategoryHeading';
+import CategoryBalance from './CategoryBalance';
+import CategoryNotes from './CategoryNotes';
+import { getIsAdjustingBudget } from '../../state/ui/selectors';
+import uiSlice from '../../state/ui/slice';
+import { useAction } from '../../state/hooks';
+import { Budget } from '../../types/budget';
 
 interface Props {
-  categoryId: number;
+  categoryId: Budget.Id;
   isIncome?: boolean;
 }
 
@@ -27,10 +25,11 @@ function Category(props: Props) {
   const Tag = isAdjustingBudget ? Card : CardClickable;
 
   const openCategoryDrawer = useAction(uiSlice.actions.openCategoryDrawer);
-  const handleClick = useCallback(
-    () => openCategoryDrawer({ id: categoryId, isIncome }),
-    [openCategoryDrawer, categoryId, isIncome]
-  );
+  const handleClick = useCallback(() => openCategoryDrawer({ id: categoryId, isIncome }), [
+    openCategoryDrawer,
+    categoryId,
+    isIncome,
+  ]);
 
   if (!category) return null;
 
@@ -39,11 +38,7 @@ function Category(props: Props) {
   return (
     <Tag onClick={handleClick}>
       <CategoryHeading id={categoryId} title={title} amount={planned_amount} />
-      <CategoryBalance
-        plannedAmount={planned_amount}
-        actualAmount={actualAmount}
-        isIncome={isIncome}
-      />
+      <CategoryBalance plannedAmount={planned_amount} actualAmount={actualAmount} isIncome={isIncome} />
       <CategoryNotes id={categoryId} notes={notes} />
     </Tag>
   );

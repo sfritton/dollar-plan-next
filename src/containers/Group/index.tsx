@@ -6,10 +6,13 @@ import styles from './group.module.css';
 import Category from '../Category';
 import { getIsAdjustingBudget } from '../../state/ui/selectors';
 import { CardClickable } from '../../components/Card';
-import { GroupId } from '../../state/groups/types';
+import { useAction } from '../../state/hooks';
+import groupsSlice from '../../state/groups/slice';
+import uniqueId from '../../util/uniqueId';
+import { Budget } from '../../types/budget';
 
 interface Props {
-  groupId: GroupId;
+  groupId: Budget.Id;
   noTitle?: boolean;
 }
 
@@ -19,6 +22,8 @@ function Group(props: Props) {
 
   const group = useSelector(getGroup);
   const isAdjustingBudget = useSelector(getIsAdjustingBudget);
+
+  const addCategory = useAction(groupsSlice.actions.addCategory);
 
   if (!group) return null;
 
@@ -30,7 +35,10 @@ function Group(props: Props) {
           <Category categoryId={id} isIncome={group.is_income} key={id} />
         ))}
         {isAdjustingBudget && (
-          <CardClickable className={styles.addCategoryButton} onClick={() => {}}>
+          <CardClickable
+            className={styles.addCategoryButton}
+            onClick={() => addCategory({ id: uniqueId('category'), groupId })}
+          >
             Add a category
           </CardClickable>
         )}

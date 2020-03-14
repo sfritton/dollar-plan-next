@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Budget } from '../../types/budget';
 import { getIsAdjustingBudget } from '../../state/ui/selectors';
 import { InputText } from '../../components/Input';
 import { useAction } from '../../state/hooks';
@@ -8,7 +9,7 @@ import styles from './category.module.css';
 
 interface Props {
   notes: string;
-  id: number;
+  id: Budget.Id;
 }
 
 function CategoryNotes(props: Props) {
