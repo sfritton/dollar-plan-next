@@ -1,4 +1,4 @@
-import { getDollarString, getCentString } from '../currency';
+import { getDollarString, getCentString, getCentNumber } from '../currency';
 
 describe('getDollarString', () => {
   it('returns 0 for numbers below $1', () => {
@@ -16,7 +16,13 @@ describe('getDollarString', () => {
 });
 
 describe('getCentString', () => {
-  it('defaults to 0.00', () => {
+  it('handles undefined', () => {
+    expect(getCentString()).toBe('0.00');
+  });
+  it('handles NaN', () => {
+    expect(getCentString(NaN)).toBe('0.00');
+  });
+  it('handles 0', () => {
     expect(getCentString(0)).toBe('0.00');
   });
   it('handles pennies', () => {
@@ -36,5 +42,38 @@ describe('getCentString', () => {
   });
   it('handles 1000s', () => {
     expect(getCentString(128953)).toBe('1,289.53');
+  });
+});
+
+describe('getCentNumber', () => {
+  it('handles dollars and cents', () => {
+    expect(getCentNumber('12.50')).toBe(1250);
+  });
+  it('handles commas', () => {
+    expect(getCentNumber('1,002.50')).toBe(100250);
+  });
+  it('handles dollars', () => {
+    expect(getCentNumber('200')).toBe(20000);
+  });
+  it('handles dollars with commas', () => {
+    expect(getCentNumber('2,000')).toBe(200000);
+  });
+  it('handles cents', () => {
+    expect(getCentNumber('0.20')).toBe(20);
+  });
+  it('handles empty strings', () => {
+    expect(getCentNumber('')).toBe(0);
+  });
+  it('handles invalid strings', () => {
+    expect(getCentNumber('banana')).toBe(0);
+  });
+  it('handles exponents', () => {
+    expect(getCentNumber('1.2e+30')).toBe(0);
+  });
+  it('handles NaN', () => {
+    expect(getCentNumber('NaN')).toBe(0);
+  });
+  it('handles undefined', () => {
+    expect(getCentNumber()).toBe(0);
   });
 });

@@ -11,8 +11,10 @@ export function getDollarString(num: number) {
   return `${dollarString.substring(0, comma)},${dollarString.substring(comma)}`;
 }
 
-export function getCentString(num: number) {
-  const dollarStr = num ? num.toString() : '';
+export function getCentString(num?: number) {
+  if (typeof num === 'undefined' || isNaN(num)) return '0.00';
+
+  const dollarStr = String(num ?? 0);
   const comma = dollarStr.length - 5;
   const decimal = dollarStr.length - 2;
 
@@ -35,14 +37,16 @@ export function getCentString(num: number) {
   }
 }
 
-const dollarRegex = /\d\.\d/;
+const removeComma = (amount: string) => amount.replace(/,/, '');
+export const isValidDollar = (amount: string) => /^[0-9]*$/.test(removeComma(amount));
+export const isValidCent = (amount: string) => /^[0-9]+\.[0-9]{2}$/.test(removeComma(amount));
 
-export const getCentNumber = (dollarString: string) => {
-  if (dollarRegex.test(dollarString)) {
-    return Math.floor(Number(dollarString.replace(/\./, '')));
-  }
+export const getCentNumber = (dollarString = '') => {
+  if (isValidCent(dollarString)) return Math.floor(Number(dollarString.replace(/[.,]/g, '')));
 
-  return Math.floor(Number(dollarString) * 100);
+  if (isValidDollar(dollarString)) return Math.floor(Number(removeComma(dollarString)) * 100);
+
+  return 0;
 };
 
 export const isValidAmount = (amountString: string) => /^[0-9]+$/.test(amountString);

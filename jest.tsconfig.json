@@ -9,7 +9,7 @@
     "removeComments": true,
     "moduleResolution": "node",
     "lib": [
-      "es2017",
+      "ES2019",
       "dom"
     ],
     "typeRoots": [
