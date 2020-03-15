@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Budget } from '../../types/budget';
 import budgetsSlice from '../budgets/slice';
-import { getCentNumber, isValidAmount } from '../../util/currency';
 import groupsSlice from '../groups/slice';
 import { StateCategory } from './types';
 
@@ -20,16 +19,12 @@ const categoriesSlice = createSlice({
 
       category.title = action.payload.title;
     },
-    updateCategoryAmount: (state, action: PayloadAction<{ id: Budget.Id; amount: string }>) => {
-      if (!isValidAmount(action.payload.amount)) return;
-
+    updateCategoryAmount: (state, action: PayloadAction<{ id: Budget.Id; amount: number }>) => {
       const category = state[action.payload.id];
 
       if (!category) return;
 
-      const newAmount = getCentNumber(action.payload.amount);
-
-      category.planned_amount = newAmount;
+      category.planned_amount = action.payload.amount;
     },
     updateCategoryNotes: (state, action: PayloadAction<{ id: Budget.Id; notes: string }>) => {
       const category = state[action.payload.id];

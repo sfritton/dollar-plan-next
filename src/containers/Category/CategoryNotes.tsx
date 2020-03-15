@@ -22,7 +22,7 @@ function CategoryNotes(props: Props) {
     return (
       <div className={styles.notes}>
         <InputText
-          className={styles.notes}
+          className={styles.notesInput}
           value={notes}
           onChange={e => updateNotes({ id, notes: e.target.value })}
           label="Notes"

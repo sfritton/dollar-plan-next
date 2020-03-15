@@ -1,6 +1,12 @@
 import { getDollarString, getCentString, getCentNumber } from '../currency';
 
 describe('getDollarString', () => {
+  it('handles undefined', () => {
+    expect(getDollarString()).toBe('0');
+  });
+  it('handles NaN', () => {
+    expect(getDollarString(NaN)).toBe('0');
+  });
   it('returns 0 for numbers below $1', () => {
     expect(getDollarString(12)).toBe('0');
   });

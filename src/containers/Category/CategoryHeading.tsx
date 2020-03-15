@@ -38,9 +38,9 @@ const CategoryHeading = ({ title, amount, id }: Props) => {
         {isAdjustingBudget ? (
           <InputDollar
             label="Amount"
-            className={styles.notesInput}
-            value={getDollarString(amount)}
-            onChange={e => updateAmount({ id, amount: e.target.value })}
+            className={styles.amountInput}
+            value={amount}
+            onChange={amount => updateAmount({ id, amount })}
           />
         ) : (
           `$${getDollarString(amount)}`

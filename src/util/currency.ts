@@ -1,6 +1,8 @@
 const getDollarNumber = (num: number) => Math.round(num / 100);
 
-export function getDollarString(num: number) {
+export function getDollarString(num?: number) {
+  if (typeof num === 'undefined' || isNaN(num)) return '0';
+
   const dollarNumber = getDollarNumber(num);
   const dollarString = dollarNumber.toString();
 

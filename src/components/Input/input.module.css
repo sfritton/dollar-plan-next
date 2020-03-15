@@ -110,16 +110,19 @@
 /* --------------------------------------------------------
  * OVERRIDES
  * -------------------------------------------------------- */
-.input::-webkit-outer-spin-button,
-.input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.input[type='number'] {
-  -moz-appearance: textfield;
-}
 
 .select {
   -webkit-appearance: none;
+}
+/* --------------------------------------------------------
+ * NUMERIC
+ * -------------------------------------------------------- */
+
+.numeric .label,
+.numeric .input {
+  text-align: right;
+}
+
+.numeric .label {
+  right: 0;
 }

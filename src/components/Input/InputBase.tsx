@@ -14,10 +14,20 @@ export interface InputProps {
 }
 
 const InputBase: React.FC<InputProps & {
-  type: string;
   prefix?: string;
   min?: string;
-}> = ({ className = '', defaultValue, prefix, label, onChange, placeholder, type, value, min }) => {
+  isNumeric?: boolean;
+}> = ({
+  className = '',
+  defaultValue,
+  prefix,
+  label,
+  onChange,
+  placeholder,
+  value,
+  min,
+  isNumeric,
+}) => {
   const [isLabelFloating, setIsLabelFloating] = useState(
     Boolean(placeholder || defaultValue || value),
   );
@@ -34,7 +44,7 @@ const InputBase: React.FC<InputProps & {
   );
 
   return (
-    <div className={classNames(styles.base, className)}>
+    <div className={classNames({ [styles.numeric]: isNumeric }, styles.base, className)}>
       {prefix && <div className={styles.prefix}>{prefix}</div>}
       <label
         className={classNames({
@@ -50,7 +60,8 @@ const InputBase: React.FC<InputProps & {
           [styles.input]: true,
           [styles.withPrefix]: Boolean(prefix),
         })}
-        type={type}
+        type="text"
+        inputMode={isNumeric ? 'numeric' : undefined}
         value={value}
         defaultValue={defaultValue}
         onChange={handleChange}
