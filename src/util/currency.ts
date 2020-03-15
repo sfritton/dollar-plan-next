@@ -4,7 +4,7 @@ export function getDollarString(num: number) {
   const dollarNumber = getDollarNumber(num);
   const dollarString = dollarNumber.toString();
 
-  if (dollarString.length > 4) return dollarString;
+  if (dollarString.length < 4) return dollarString;
 
   const comma = dollarString.length - 3;
 

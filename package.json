@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "jest": "jest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.2.5",
@@ -25,17 +26,24 @@
     "react-redux": "^7.2.0"
   },
   "devDependencies": {
+    "@types/jest": "^25.1.4",
     "@types/node": "^13.7.7",
     "@types/react": "^16.9.23",
     "@types/react-redux": "^7.1.7",
     "@typescript-eslint/eslint-plugin": "^2.22.0",
     "@typescript-eslint/parser": "^2.22.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^25.1.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "fs-extra": "^8.1.0",
+    "jest": "^25.1.0",
     "prettier": "^1.19.1",
+    "ts-jest": "^25.2.1",
     "typescript": "^3.8.3"
   }
 }
