@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import { Status } from '../../state/types';
 import { getStatus, selectBudgets } from '../../state/budgets/selectors';
@@ -24,6 +25,9 @@ const HomePage: NextPage = () => {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Dollar Plan</title>
+      </Head>
       <h1 className={styles.title}>Dollar Plan</h1>
       {status === Status.SUCCESS && (
         <div className={styles.fadeIn}>

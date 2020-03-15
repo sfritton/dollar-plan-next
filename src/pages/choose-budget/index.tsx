@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useSelector } from 'react-redux';
 import { Status } from '../../state/types';
 import { selectBudgets, getStatus } from '../../state/budgets/selectors';
@@ -33,6 +34,9 @@ const ChooseBudgetPage: NextPage = () => {
 
   return (
     <div className={styles.container}>
+      <Head>
+        <title>Dollar Plan</title>
+      </Head>
       <h1 className={styles.title}>Dollar Plan</h1>
       <h2 className={styles.heading}>Choose a budget</h2>
       <InputText

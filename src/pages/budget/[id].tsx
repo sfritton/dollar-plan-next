@@ -1,6 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Status } from '../../state/types';
 import { useAction } from '../../state/hooks';
@@ -10,6 +11,14 @@ import Header from '../../containers/Header';
 import BudgetPageContent from '../../containers/BudgetPageContent';
 import Layout from '../../components/Layout';
 import uiSlice from '../../state/ui/slice';
+import { BudgetLoaded, BudgetUnloaded } from '../../state/budgets/slice';
+import { getMonthName } from '../../util/date';
+
+const getPageTitle = (budget?: BudgetLoaded | BudgetUnloaded) => {
+  if (!budget || budget.status !== Status.SUCCESS) return 'Dollar Plan';
+
+  return `${getMonthName(budget.month)} ${budget.year} | Dollar Plan`;
+};
 
 const BudgetPage: NextPage = () => {
   const router = useRouter();
@@ -37,6 +46,9 @@ const BudgetPage: NextPage = () => {
 
   return (
     <Layout.Grid>
+      <Head>
+        <title>{getPageTitle(budget)}</title>
+      </Head>
       <Layout.Header>
         <Header budgetId={budgetId} />
       </Layout.Header>

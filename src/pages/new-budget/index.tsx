@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { NextPage } from 'next';
+import Head from 'next/head';
 import Router from 'next/router';
 import styles from './new-budget.module.css';
 import { Select } from '../../components/Input';
@@ -22,6 +23,9 @@ const NewBudgetPage: NextPage = () => {
 
   return (
     <div className={styles.page}>
+      <Head>
+        <title>New Budget | Dollar Plan</title>
+      </Head>
       <div className={styles.container}>
         <div className={styles.instructions}>Select a month and year for the new budget</div>
         <div className={styles.selectContainer}>
