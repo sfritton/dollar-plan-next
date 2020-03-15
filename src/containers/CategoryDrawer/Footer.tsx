@@ -6,6 +6,7 @@ import { useAction } from '../../state/hooks';
 import { useSelector } from 'react-redux';
 import { getIsEditingTransactions } from '../../state/ui/selectors';
 import IconEdit from '../../icons/IconEdit';
+import styles from '../../components/Drawer/drawer.module.css';
 
 const editTransactionsAction = () => uiSlice.actions.setIsEditingTransactions(true);
 
@@ -18,14 +19,14 @@ const Footer: React.FC = () => {
 
   if (isEditingTransactions)
     return (
-      <ButtonPrimary className="budget-drawer--footer" onClick={saveTransactions}>
-        <IconSave className="budget-drawer--footer-icon" /> Save
+      <ButtonPrimary className={styles.footerButton} onClick={saveTransactions}>
+        <IconSave className={styles.footerIcon} /> Save
       </ButtonPrimary>
     );
 
   return (
-    <ButtonPrimary className="budget-drawer--footer" onClick={editTransactions}>
-      <IconEdit className="budget-drawer--footer-icon" /> Edit transactions
+    <ButtonPrimary className={styles.footerButton} onClick={editTransactions}>
+      <IconEdit className={styles.footerIcon} /> Edit transactions
     </ButtonPrimary>
   );
 };

@@ -47,11 +47,11 @@ function CategoryDrawer() {
             />
             {category.notes && (
               <>
-                <h3 className={styles.header}>Notes</h3>
+                <h3 className={styles.heading}>Notes</h3>
                 <div className={styles.notes}>{category.notes}</div>
               </>
             )}
-            <h3 className={styles.header}>Transactions</h3>
+            <h3 className={styles.heading}>Transactions</h3>
           </div>
           <ul className={styles.transactions}>
             {transactionIds && transactionIds.map(id => <Transaction id={id} key={id} />)}

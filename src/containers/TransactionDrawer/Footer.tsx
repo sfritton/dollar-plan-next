@@ -3,13 +3,14 @@ import { ButtonPrimary } from '../../components/Button';
 import IconSave from '../../icons/IconSave';
 import { useAction } from '../../state/hooks';
 import uiSlice from '../../state/ui/slice';
+import styles from '../../components/Drawer/drawer.module.css';
 
 const Footer: React.FC = () => {
   const closeDrawer = useAction(uiSlice.actions.closeTransactionDrawer);
 
   return (
-    <ButtonPrimary className="budget-drawer--footer" onClick={closeDrawer}>
-      <IconSave className="budget-drawer--footer-icon" /> Save
+    <ButtonPrimary className={styles.footerButton} onClick={closeDrawer}>
+      <IconSave className={styles.footerIcon} /> Save
     </ButtonPrimary>
   );
 };

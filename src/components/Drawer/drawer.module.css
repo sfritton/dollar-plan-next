@@ -56,3 +56,16 @@
 .header h2 {
   margin: 0;
 }
+
+.footerButton {
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 40px;
+}
+
+.footerIcon {
+  margin-right: var(--space-x1);
+}
