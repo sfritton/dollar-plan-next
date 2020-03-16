@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
 import classNames from '../../util/classNames';
 import { hasMonthStarted, hasMonthEnded, getDaysLeft } from '../../util/date';
 import { BudgetWithMetadata } from '../../state/budgets/slice';
@@ -12,6 +11,8 @@ import {
 import styles from './header.module.css';
 import { getDollarString } from '../../util/currency';
 import { getIsAdjustingBudget } from '../../state/ui/selectors';
+import useBudgetId from '../../hooks/useBudgetId';
+import useBudget from '../../hooks/useBudget';
 
 const getDaysLeftMessage = (budget: BudgetWithMetadata) => {
   const date = { month: budget.month, year: budget.year };
@@ -50,15 +51,9 @@ const useBalanceMessage = (budgetId: string) => {
   return 'Balance: $' + getDollarString(actualBalance);
 };
 
-interface Props {
-  budget?: BudgetWithMetadata;
-}
-
-function SubHeader(props: Props) {
-  const { budget } = props;
-  const router = useRouter();
-  const rawId = router.query.id;
-  const budgetId = Array.isArray(rawId) ? '' : rawId;
+function SubHeader() {
+  const budgetId = useBudgetId();
+  const budget = useBudget();
 
   const balanceMessage = useBalanceMessage(budgetId);
   const isBalanced = useSelector(makeGetIsBalanced(budgetId));

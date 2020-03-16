@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { makeGetBudget } from '../../state/budgets/selectors';
 import { getMonthName } from '../../util/date';
 import SubHeader from './SubHeader';
 import styles from './header.module.css';
@@ -12,16 +11,10 @@ import { getIsAdjustingBudget } from '../../state/ui/selectors';
 import IconClose from '../../icons/IconClose';
 import IconSave from '../../icons/IconSave';
 import { useAction } from '../../state/hooks';
+import useBudget from '../../hooks/useBudget';
 
-interface Props {
-  budgetId: string;
-}
-
-function Header(props: Props) {
-  const { budgetId } = props;
-  const getBudget = useMemo(() => makeGetBudget(budgetId), [budgetId]);
-
-  const budget = useSelector(getBudget);
+function Header() {
+  const budget = useBudget();
   const isAdjustingBudget = useSelector(getIsAdjustingBudget);
   const setIsAdjustingBudget = useAction(uiSlice.actions.setIsAdjustingBudget);
 
@@ -37,7 +30,7 @@ function Header(props: Props) {
                 onClick={() => setIsAdjustingBudget(false)}
               />
             ) : (
-              <BudgetDrawer budgetId={budgetId} />
+              <BudgetDrawer />
             )}
             <h1 className={styles.title}>
               {getMonthName(budget.month)} {budget.year}
@@ -58,7 +51,7 @@ function Header(props: Props) {
           </>
         )}
       </div>
-      <SubHeader budget={budget} />
+      <SubHeader />
     </>
   );
 }

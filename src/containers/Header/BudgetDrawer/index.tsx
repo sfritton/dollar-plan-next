@@ -10,13 +10,10 @@ import styles from './budget-drawer.module.css';
 import BudgetButton from './BudgetButton';
 import Footer from './Footer';
 import { useAction } from '../../../state/hooks';
+import useBudgetId from '../../../hooks/useBudgetId';
 
-interface Props {
-  budgetId: string;
-}
-
-function BudgetDrawer(props: Props) {
-  const { budgetId } = props;
+function BudgetDrawer() {
+  const budgetId = useBudgetId();
 
   const budgetIds = useSelector(getBudgetIds);
   const status = useSelector(getStatus);

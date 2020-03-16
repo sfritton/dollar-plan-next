@@ -1,9 +1,9 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import { makeGetCategoryOptions } from './selectors';
 import Select, { Props as SelectProps } from '../../components/Input/Select';
 import styles from './transaction-drawer.module.css';
+import useBudgetId from '../../hooks/useBudgetId';
 
 interface Props {
   value?: SelectProps['value'];
@@ -11,11 +11,8 @@ interface Props {
 }
 
 const CategorySelect: React.FC<Props> = ({ value, onChange }) => {
-  const router = useRouter();
-  const rawId = router.query.id;
-  const budgetId = Array.isArray(rawId) ? '' : rawId;
-
-  const categoryOptions = useSelector(makeGetCategoryOptions(budgetId || ''));
+  const budgetId = useBudgetId();
+  const categoryOptions = useSelector(makeGetCategoryOptions(budgetId));
 
   if (!categoryOptions || categoryOptions.length < 1) return null;
 

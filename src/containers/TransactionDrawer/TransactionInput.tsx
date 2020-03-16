@@ -1,8 +1,6 @@
 import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
 import { Budget } from '../../types/budget';
-import { makeGetBudget } from '../../state/budgets/selectors';
 import { getMonthNameShort, getLastDayOfMonth } from '../../util/date';
 import { Select, InputText, InputCent } from '../../components/Input';
 import CategorySelect from './CategorySelect';
@@ -10,6 +8,7 @@ import { ButtonWithIcon } from '../../components/Button';
 import IconDelete from '../../icons/IconDelete';
 import styles from './transaction-drawer.module.css';
 import { makeGetTransaction } from '../../state/transactions/selectors';
+import useBudget from '../../hooks/useBudget';
 
 const dates = [...new Array(31)].map((_, index) => index + 1);
 
@@ -27,11 +26,7 @@ interface Props {
 }
 
 const TransactionInput: React.FC<Props> = ({ removeTransaction, id }) => {
-  const router = useRouter();
-  const rawId = router.query.id;
-  const budgetId = Array.isArray(rawId) ? '' : rawId;
-
-  const budget = useSelector(makeGetBudget(budgetId));
+  const budget = useBudget();
   const transaction = useSelector(makeGetTransaction(id));
 
   const removeCallback = useCallback(() => {

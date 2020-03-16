@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useAction } from '../../state/hooks';
-import { useRouter } from 'next/router';
 import { getIsTransactionDrawerOpen } from '../../state/ui/selectors';
 import Drawer from '../../components/Drawer';
 import Footer from './Footer';
@@ -11,15 +10,14 @@ import TransactionInput from './TransactionInput';
 import styles from './transaction-drawer.module.css';
 import { ButtonSecondary } from '../../components/Button';
 import uniqueId from '../../util/uniqueId';
-import { makeGetBudget } from '../../state/budgets/selectors';
+import useBudgetId from '../../hooks/useBudgetId';
+import useBudget from '../../hooks/useBudget';
 
 function TransactionDrawer() {
   const isOpen = useSelector(getIsTransactionDrawerOpen);
-  const router = useRouter();
-  const rawId = router.query.id;
-  const budgetId = Array.isArray(rawId) ? '' : rawId;
+  const budgetId = useBudgetId();
+  const budget = useBudget();
 
-  const budget = useSelector(makeGetBudget(Number(budgetId)));
   const closeDrawerAction = useAction(uiSlice.actions.closeTransactionDrawer);
   const createTransaction = useAction(transactionsSlice.actions.createIndependentTransaction);
   const [transactions, setTransactions] = useState<string[]>([]);
