@@ -3,7 +3,7 @@ import styles from './input.module.css';
 import IconDropdown from '../../icons/IconDropdown';
 import classNames from '../../util/classNames';
 
-interface Props {
+export interface Props {
   className?: string;
   defaultValue?: string | number;
   label: string;
