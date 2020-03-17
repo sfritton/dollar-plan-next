@@ -6,7 +6,7 @@ import Drawer from '../../components/Drawer';
 import Footer from './Footer';
 import uiSlice from '../../state/ui/slice';
 import transactionsSlice from '../../state/transactions/slice';
-import TransactionInput from './TransactionInput';
+import TransactionInput from '../Transaction/TransactionInput';
 import styles from './transaction-drawer.module.css';
 import { ButtonSecondary } from '../../components/Button';
 import uniqueId from '../../util/uniqueId';
@@ -44,9 +44,11 @@ function TransactionDrawer() {
 
   return (
     <Drawer title="Add transactions" isOpen={isOpen} onClose={closeDrawer} Footer={Footer}>
-      {transactions.map(id => (
-        <TransactionInput key={id} id={id} />
-      ))}
+      <ul>
+        {transactions.map(id => (
+          <TransactionInput key={id} id={id} />
+        ))}
+      </ul>
       <ButtonSecondary onClick={addTransaction} className={styles.addAnother}>
         Add another
       </ButtonSecondary>

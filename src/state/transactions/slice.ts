@@ -3,6 +3,7 @@ import { Budget } from '../../types/budget';
 import budgetsSlice from '../budgets/slice';
 import { getClosestToToday, SimpleDate } from '../../util/date';
 import { StateTransaction } from './types';
+import categoriesSlice from '../categories/slice';
 
 const initialState: Dictionary<string, StateTransaction> = {};
 
@@ -72,6 +73,26 @@ const groupsSlice = createSlice({
       return {
         ...state,
         ...budget.transactions,
+      };
+    },
+    [categoriesSlice.actions.createTransaction.toString()]: (
+      state,
+      action: PayloadAction<{
+        id: Budget.Id;
+        budgetId: Budget.Id;
+        categoryId: Budget.Id;
+        date: SimpleDate;
+      }>,
+    ) => {
+      state[action.payload.id] = {
+        id: action.payload.id,
+        category_id: action.payload.categoryId,
+        group_id: '',
+        budget_id: action.payload.budgetId,
+        description: '',
+        date: getClosestToToday(action.payload.date).getDate(),
+        amount: 0,
+        isNew: true,
       };
     },
   },

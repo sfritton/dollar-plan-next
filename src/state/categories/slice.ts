@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Budget } from '../../types/budget';
 import budgetsSlice from '../budgets/slice';
 import groupsSlice from '../groups/slice';
+import { SimpleDate } from '../../util/date';
 import { StateCategory } from './types';
 
 const initialState: Dictionary<string, StateCategory> = {};
@@ -35,6 +36,21 @@ const categoriesSlice = createSlice({
 
       category.notes = action.payload.notes;
       category.isUpdated = true;
+    },
+    createTransaction: (
+      state,
+      action: PayloadAction<{
+        id: Budget.Id;
+        budgetId: Budget.Id;
+        categoryId: Budget.Id;
+        date: SimpleDate;
+      }>,
+    ) => {
+      const category = state[action.payload.categoryId];
+
+      if (!category) return;
+
+      category.transactionIds = [...category.transactionIds, action.payload.id];
     },
   },
   extraReducers: {

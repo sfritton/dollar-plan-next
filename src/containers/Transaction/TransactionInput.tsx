@@ -1,32 +1,25 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Budget } from '../../types/budget';
 import { getMonthNameShort, getLastDayOfMonth } from '../../util/date';
 import { Select, InputText, InputCent } from '../../components/Input';
 import CategorySelect from './CategorySelect';
 import { ButtonWithIcon } from '../../components/Button';
 import IconDelete from '../../icons/IconDelete';
-import styles from './transaction-drawer.module.css';
+import styles from './transaction.module.css';
 import transactionsSlice from '../../state/transactions/slice';
 import { makeGetTransaction } from '../../state/transactions/selectors';
 import useBudget from '../../hooks/useBudget';
 import { useAction } from '../../state/hooks';
+import { Budget } from '../../types/budget';
 
 const dates = [...new Array(31)].map((_, index) => index + 1);
 
-export interface TempTransaction {
-  id: string;
-  category_id?: Budget.Transaction['category_id'];
-  amount?: Budget.Transaction['amount'];
-  date?: Budget.Transaction['date'];
-  description?: Budget.Transaction['description'];
-}
-
 interface Props {
-  id: string;
+  id: Budget.Id;
+  hideCategorySelect?: boolean;
 }
 
-const TransactionInput: React.FC<Props> = ({ id }) => {
+const TransactionInput: React.FC<Props> = ({ id, hideCategorySelect }) => {
   const budget = useBudget();
   const transaction = useSelector(makeGetTransaction(id));
 
@@ -44,7 +37,7 @@ const TransactionInput: React.FC<Props> = ({ id }) => {
   const lastDay = getLastDayOfMonth({ month, year }).getDate();
 
   return (
-    <div className={styles.inputCard}>
+    <li className={styles.inputCard}>
       <div className={styles.inputCardInputs}>
         <div className={styles.inputCardFirstRow}>
           <Select
@@ -66,10 +59,12 @@ const TransactionInput: React.FC<Props> = ({ id }) => {
             className={styles.amountInput}
           />
         </div>
-        <CategorySelect
-          value={String(transaction.category_id)}
-          onChange={categoryId => updateCategory({ id, categoryId })}
-        />
+        {!hideCategorySelect && (
+          <CategorySelect
+            value={String(transaction.category_id)}
+            onChange={categoryId => updateCategory({ id, categoryId })}
+          />
+        )}
         <InputText
           label="Description"
           value={transaction.description}
@@ -83,7 +78,7 @@ const TransactionInput: React.FC<Props> = ({ id }) => {
         Icon={IconDelete}
         label="Delete transaction"
       />
-    </div>
+    </li>
   );
 };
 
