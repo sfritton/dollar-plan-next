@@ -24,7 +24,7 @@ function CategoryNotes(props: Props) {
         <InputText
           className={styles.notesInput}
           value={notes}
-          onChange={e => updateNotes({ id, notes: e.target.value })}
+          onChange={newNotes => updateNotes({ id, notes: newNotes })}
           label="Notes"
         />
       </div>

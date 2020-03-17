@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import InputBase, { InputProps } from './InputBase';
 
-const InputText: React.FC<InputProps> = props => <InputBase {...props} />;
+interface Props extends Omit<InputProps, 'onChange'> {
+  onChange?: (value: string) => void;
+}
+
+const InputText: React.FC<Props> = ({ onChange, ...props }) => {
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => onChange?.(event.target.value),
+    [onChange],
+  );
+
+  return <InputBase onChange={handleChange} {...props} />;
+};
 
 export default InputText;

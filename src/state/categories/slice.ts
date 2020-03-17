@@ -18,6 +18,7 @@ const categoriesSlice = createSlice({
       if (!category) return;
 
       category.title = action.payload.title;
+      category.isUpdated = true;
     },
     updateCategoryAmount: (state, action: PayloadAction<{ id: Budget.Id; amount: number }>) => {
       const category = state[action.payload.id];
@@ -25,6 +26,7 @@ const categoriesSlice = createSlice({
       if (!category) return;
 
       category.planned_amount = action.payload.amount;
+      category.isUpdated = true;
     },
     updateCategoryNotes: (state, action: PayloadAction<{ id: Budget.Id; notes: string }>) => {
       const category = state[action.payload.id];
@@ -32,6 +34,7 @@ const categoriesSlice = createSlice({
       if (!category) return;
 
       category.notes = action.payload.notes;
+      category.isUpdated = true;
     },
   },
   extraReducers: {

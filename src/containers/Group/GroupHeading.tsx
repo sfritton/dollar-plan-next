@@ -24,7 +24,7 @@ function GroupHeading(props: Props) {
           className={styles.titleInput}
           value={title}
           label="Group name"
-          onChange={e => updateTitle({ id, title: e.target.value })}
+          onChange={newTitle => updateTitle({ id, title: newTitle })}
         />
       ) : (
         <h3>{title}</h3>

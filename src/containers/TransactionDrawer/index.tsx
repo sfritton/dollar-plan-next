@@ -35,12 +35,6 @@ function TransactionDrawer() {
     setTransactions(prevTransactions => [...prevTransactions, id]);
   }, [setTransactions, budgetId, budget, createTransaction]);
 
-  const removeTransaction = useCallback(
-    (id: string) =>
-      setTransactions(prevTransactions => prevTransactions.filter(prevId => prevId !== id)),
-    [setTransactions],
-  );
-
   // add a transaction when the drawer first opens
   useEffect(() => {
     if (!isOpen) return;
@@ -51,7 +45,7 @@ function TransactionDrawer() {
   return (
     <Drawer title="Add transactions" isOpen={isOpen} onClose={closeDrawer} Footer={Footer}>
       {transactions.map(id => (
-        <TransactionInput key={id} removeTransaction={removeTransaction} id={id} />
+        <TransactionInput key={id} id={id} />
       ))}
       <ButtonSecondary onClick={addTransaction} className={styles.addAnother}>
         Add another

@@ -32,7 +32,7 @@ const NewBudgetPage: NextPage = () => {
           <Select
             label="Month"
             className={styles.select}
-            onChange={e => setChosenMonth(e.target.value)}
+            onChange={newMonth => setChosenMonth(Number(newMonth))}
           >
             {months.map((month, i) => (
               <option key={month} value={i + 1}>
@@ -43,7 +43,7 @@ const NewBudgetPage: NextPage = () => {
           <Select
             label="Year"
             className={styles.select}
-            onChange={e => setChosenYear(e.target.value)}
+            onChange={newYear => setChosenYear(Number(newYear))}
           >
             {nextTenYears.map(year => (
               <option key={year} value={year}>

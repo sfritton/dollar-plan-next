@@ -28,7 +28,7 @@ const CategoryHeading = ({ title, amount, id }: Props) => {
             className={styles.titleInput}
             label="Category name"
             value={title}
-            onChange={e => updateTitle({ id, title: e.target.value })}
+            onChange={newTitle => updateTitle({ id, title: newTitle })}
           />
         ) : (
           title

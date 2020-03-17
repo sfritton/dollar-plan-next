@@ -17,6 +17,7 @@ const groupsSlice = createSlice({
       if (!group) return;
 
       group.title = action.payload.title;
+      group.isUpdated = true;
     },
     addCategory: (state, action: PayloadAction<{ id: Budget.Id; groupId: Budget.Id }>) => {
       const group = state[action.payload.groupId];

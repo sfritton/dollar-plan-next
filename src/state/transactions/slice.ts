@@ -27,6 +27,37 @@ const groupsSlice = createSlice({
         isNew: true,
       };
     },
+    updateDate: (state, action: PayloadAction<{ id: Budget.Id; date: number }>) => {
+      const transaction = state[action.payload.id];
+      if (!transaction) return;
+
+      transaction.date = action.payload.date;
+      transaction.isUpdated = true;
+    },
+    updateAmount: (state, action: PayloadAction<{ id: Budget.Id; amount: number }>) => {
+      const transaction = state[action.payload.id];
+      if (!transaction) return;
+
+      transaction.amount = action.payload.amount;
+      transaction.isUpdated = true;
+    },
+    updateCategory: (state, action: PayloadAction<{ id: Budget.Id; categoryId: Budget.Id }>) => {
+      const transaction = state[action.payload.id];
+      if (!transaction) return;
+
+      transaction.category_id = action.payload.categoryId;
+      transaction.isUpdated = true;
+    },
+    updateDescription: (state, action: PayloadAction<{ id: Budget.Id; description: string }>) => {
+      const transaction = state[action.payload.id];
+      if (!transaction) return;
+
+      transaction.description = action.payload.description;
+      transaction.isUpdated = true;
+    },
+    deleteTransaction: (state, action: PayloadAction<{ id: Budget.Id }>) => {
+      state[action.payload.id] = undefined;
+    },
   },
   extraReducers: {
     [budgetsSlice.actions.addBudgetSuccess.toString()]: (

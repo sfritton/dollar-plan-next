@@ -41,7 +41,7 @@ export function getCentString(num?: number) {
 
 const removeComma = (amount: string) => amount.replace(/,/, '');
 export const isValidDollar = (amount: string) => /^[0-9]*$/.test(removeComma(amount));
-export const isValidCent = (amount: string) => /^[0-9]+\.[0-9]{2}$/.test(removeComma(amount));
+export const isValidCent = (amount: string) => /^[0-9]+\.[0-9]+$/.test(removeComma(amount));
 
 export const getCentNumber = (dollarString = '') => {
   if (isValidCent(dollarString)) return Math.floor(Number(dollarString.replace(/[.,]/g, '')));
