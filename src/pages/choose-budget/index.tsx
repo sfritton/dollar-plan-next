@@ -42,7 +42,7 @@ const ChooseBudgetPage: NextPage = () => {
       <InputText
         className={styles.search}
         value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
+        onChange={setSearchTerm}
         label="Filter"
       />
       <div className={styles.budgetsContainer}>
