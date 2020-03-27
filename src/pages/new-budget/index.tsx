@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import styles from './new-budget.module.css';
 import { Select } from '../../components/Input';
+import Checkbox from '../../components/Checkbox';
 import { ButtonPrimary } from '../../components/Button';
 import { months } from '../../util/date';
 import CreateBudget from '../../services/CreateBudget';
@@ -14,6 +15,7 @@ const nextTenYears = [...new Array(10)].map((_, i) => currentYear + i);
 const NewBudgetPage: NextPage = () => {
   const [chosenMonth, setChosenMonth] = useState(1);
   const [chosenYear, setChosenYear] = useState(currentYear);
+  const [isCopying, setIsCopying] = useState(false);
 
   const handleCreateBudget = useCallback(async () => {
     const { id } = await CreateBudget({ month: chosenMonth, year: chosenYear });
@@ -52,6 +54,12 @@ const NewBudgetPage: NextPage = () => {
             ))}
           </Select>
         </div>
+        <Checkbox
+          className={styles.checkbox}
+          label="Copy an existing budget"
+          checked={isCopying}
+          onChange={setIsCopying}
+        />
         <ButtonPrimary onClick={handleCreateBudget} className={styles.button}>
           Create budget
         </ButtonPrimary>
