@@ -5,6 +5,7 @@ import SaveTransactions from '../../services/SaveTransactions';
 import { StateTransaction } from '../transactions/types';
 import slice from './slice';
 import { makeGetCategory } from '../categories/selectors';
+import transactionsToDeleteSlice from '../transactionsToDelete/slice';
 
 function saveTransactions(id: Budget.Id): AppThunk {
   const getModified = makeGetModified(id);
@@ -16,14 +17,23 @@ function saveTransactions(id: Budget.Id): AppThunk {
       getModified,
     ) as StateTransaction[];
 
-    const transactions = modifiedTransactions.map(transaction => ({
-      ...transaction,
-      group_id: makeGetCategory(transaction.category_id)(state)?.group_id ?? '',
+    const deletedTransactions = state.transactionsToDelete.map(id => ({
+      id,
+      isDeleted: true as const,
     }));
+
+    const transactions = [
+      ...modifiedTransactions.map(transaction => ({
+        ...transaction,
+        group_id: makeGetCategory(transaction.category_id)(state)?.group_id ?? '',
+      })),
+      ...deletedTransactions,
+    ];
 
     try {
       const budget = await SaveTransactions({ id, transactions });
 
+      dispatch(transactionsToDeleteSlice.actions.clear());
       dispatch(slice.actions.addBudgetSuccess({ id, budget }));
     } catch (error) {
       dispatch(slice.actions.addBudgetFailure({ id, error: error.message }));

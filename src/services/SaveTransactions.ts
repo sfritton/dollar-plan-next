@@ -4,14 +4,14 @@ import { StateTransaction } from '../state/transactions/types';
 
 interface SaveTransactionsBody {
   id: Budget.Id;
-  transactions: StateTransaction[];
+  transactions: (StateTransaction | { id: Budget.Id; isDeleted: true })[];
 }
 
-async function SaveBudget(body: SaveTransactionsBody) {
+async function SaveTransactions(body: SaveTransactionsBody) {
   return await fetchPost<SaveTransactionsBody, Budget.BudgetResponse>(
     'http://localhost:3000/transactions',
     body,
   );
 }
 
-export default SaveBudget;
+export default SaveTransactions;
