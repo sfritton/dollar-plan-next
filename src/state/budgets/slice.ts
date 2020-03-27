@@ -56,7 +56,7 @@ const budgetsSlice = createSlice({
       error: action.payload,
       status: Status.FAILURE,
     }),
-    addBudgetPending: (state, action: PayloadAction<string>) => {
+    addBudgetPending: (state, action: PayloadAction<Budget.Id>) => {
       const budget = state.idMap[action.payload];
 
       if (!budget) return;
@@ -69,7 +69,7 @@ const budgetsSlice = createSlice({
     addBudgetSuccess: (
       state,
       action: PayloadAction<{
-        id: string;
+        id: Budget.Id;
         budget: Budget.BudgetResponse;
       }>,
     ) => {
@@ -85,7 +85,7 @@ const budgetsSlice = createSlice({
         status: Status.SUCCESS,
       };
     },
-    addBudgetFailure: (state, action: PayloadAction<{ id: string; error: string }>) => {
+    addBudgetFailure: (state, action: PayloadAction<{ id: Budget.Id; error: string }>) => {
       const { id, error } = action.payload;
       const budget = state.idMap[id];
 
