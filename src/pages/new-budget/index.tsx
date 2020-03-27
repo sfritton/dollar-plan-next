@@ -1,27 +1,50 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
+import { useSelector } from 'react-redux';
 import Router from 'next/router';
+import { Status } from '../../state/types';
+import { selectBudgets, getStatus } from '../../state/budgets/selectors';
+import fetchBudgetsAction from '../../state/budgets/fetchBudgets';
+import { useAction } from '../../state/hooks';
 import styles from './new-budget.module.css';
 import { Select } from '../../components/Input';
 import Checkbox from '../../components/Checkbox';
 import { ButtonPrimary } from '../../components/Button';
-import { months } from '../../util/date';
+import { months, getMonthName } from '../../util/date';
 import CreateBudget from '../../services/CreateBudget';
+import { Budget } from '../../types/budget';
 
 const currentYear = new Date().getFullYear();
 const nextTenYears = [...new Array(10)].map((_, i) => currentYear + i);
 
 const NewBudgetPage: NextPage = () => {
+  const status = useSelector(getStatus);
+  const budgets = useSelector(selectBudgets);
+
+  const fetchBudgets = useAction(fetchBudgetsAction);
+
+  useEffect(() => {
+    if (status === Status.INIT) {
+      fetchBudgets();
+    }
+  }, [status, fetchBudgets]);
+
   const [chosenMonth, setChosenMonth] = useState(1);
   const [chosenYear, setChosenYear] = useState(currentYear);
   const [isCopying, setIsCopying] = useState(false);
+  const [prevBudgetId, setPrevBudgetId] = useState<Budget.Id>();
 
   const handleCreateBudget = useCallback(async () => {
-    const { id } = await CreateBudget({ month: chosenMonth, year: chosenYear });
+    const { id } = await CreateBudget({
+      month: chosenMonth,
+      year: chosenYear,
+      isCopying,
+      prevBudgetId,
+    });
 
     Router.push(`/budget/${id}?adjusting=true`);
-  }, [chosenMonth, chosenYear]);
+  }, [chosenMonth, chosenYear, isCopying, prevBudgetId]);
 
   return (
     <div className={styles.page}>
@@ -60,6 +83,20 @@ const NewBudgetPage: NextPage = () => {
           checked={isCopying}
           onChange={setIsCopying}
         />
+        {isCopying && (
+          <Select
+            value={String(prevBudgetId)}
+            onChange={setPrevBudgetId}
+            label="Make a copy of"
+            className={styles.prevBudgetSelect}
+          >
+            {budgets.map(budget => (
+              <option key={budget.id}>
+                {getMonthName(budget.month)} {budget.year}
+              </option>
+            ))}
+          </Select>
+        )}
         <ButtonPrimary onClick={handleCreateBudget} className={styles.button}>
           Create budget
         </ButtonPrimary>
