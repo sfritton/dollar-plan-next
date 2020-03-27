@@ -20,6 +20,7 @@ import useBudgetId from '../../hooks/useBudgetId';
 import uniqueId from '../../util/uniqueId';
 import useBudget from '../../hooks/useBudget';
 import categoriesSlice from '../../state/categories/slice';
+import fetchBudgetAction from '../../state/budgets/fetchBudget';
 
 function CategoryDrawer() {
   const budgetId = useBudgetId();
@@ -31,8 +32,14 @@ function CategoryDrawer() {
   const actualAmount = useSelector(makeGetActualAmount(categoryId || 0));
   const isEditingTransactions = useSelector(getIsEditingTransactions);
 
+  const fetchBudget = useAction(fetchBudgetAction);
   const closeDrawer = useAction(uiSlice.actions.closeCategoryDrawer);
   const createTransaction = useAction(categoriesSlice.actions.createTransaction);
+
+  const handleClose = useCallback(() => {
+    if (isEditingTransactions) fetchBudget(budgetId);
+    closeDrawer();
+  }, [isEditingTransactions, fetchBudget, budgetId, closeDrawer]);
 
   const addTransaction = useCallback(() => {
     if (!budget) return;
@@ -52,7 +59,7 @@ function CategoryDrawer() {
     <Drawer
       title={title}
       isOpen={isOpen && Boolean(category)}
-      onClose={closeDrawer}
+      onClose={handleClose}
       Footer={Footer}
     >
       {category && (

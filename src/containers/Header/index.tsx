@@ -13,6 +13,7 @@ import IconSave from '../../icons/IconSave';
 import { useAction } from '../../state/hooks';
 import useBudget from '../../hooks/useBudget';
 import saveBudgetAction from '../../state/budgets/saveBudget';
+import fetchBudgetAction from '../../state/budgets/fetchBudget';
 import useBudgetId from '../../hooks/useBudgetId';
 
 function Header() {
@@ -21,6 +22,12 @@ function Header() {
   const isAdjustingBudget = useSelector(getIsAdjustingBudget);
   const setIsAdjustingBudget = useAction(uiSlice.actions.setIsAdjustingBudget);
   const saveBudget = useAction(saveBudgetAction);
+  const fetchBudget = useAction(fetchBudgetAction);
+
+  const handleCancel = useCallback(() => {
+    setIsAdjustingBudget(false);
+    fetchBudget(budgetId);
+  }, [setIsAdjustingBudget, fetchBudget, budgetId]);
 
   const handleSave = useCallback(() => {
     setIsAdjustingBudget(false);
@@ -33,11 +40,7 @@ function Header() {
         {budget && (
           <>
             {isAdjustingBudget ? (
-              <ButtonWithIcon
-                Icon={IconClose}
-                label="Cancel"
-                onClick={() => setIsAdjustingBudget(false)}
-              />
+              <ButtonWithIcon Icon={IconClose} label="Cancel" onClick={handleCancel} />
             ) : (
               <BudgetDrawer />
             )}
