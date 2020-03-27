@@ -11,7 +11,6 @@ export async function fetchGet<R>(url: string) {
 }
 
 export async function fetchPost<B, R>(url: string, body: B) {
-  console.log({ body });
   const request = new Request(url, { method: 'POST', body: JSON.stringify(body), headers });
   const response = await fetch(request);
 
