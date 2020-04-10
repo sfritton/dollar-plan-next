@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import IconSave from '../../icons/IconSave';
 import { ButtonPrimary } from '../../components/Button';
 import uiSlice from '../../state/ui/slice';
@@ -7,25 +7,29 @@ import { useSelector } from 'react-redux';
 import { getIsEditingTransactions } from '../../state/ui/selectors';
 import IconEdit from '../../icons/IconEdit';
 import styles from '../../components/Drawer/drawer.module.css';
-
-const editTransactionsAction = () => uiSlice.actions.setIsEditingTransactions(true);
-
-const saveTransactionsAction = () => uiSlice.actions.setIsEditingTransactions(false);
+import saveTransactionsAction from '../../state/budgets/saveTransactions';
+import useBudgetId from '../../hooks/useBudgetId';
 
 const Footer: React.FC = () => {
+  const budgetId = useBudgetId();
   const isEditingTransactions = useSelector(getIsEditingTransactions);
-  const editTransactions = useAction(editTransactionsAction);
+  const setIsEditingTransactions = useAction(uiSlice.actions.setIsEditingTransactions);
   const saveTransactions = useAction(saveTransactionsAction);
+
+  const handleSave = useCallback(() => {
+    saveTransactions(budgetId);
+    setIsEditingTransactions(false);
+  }, [budgetId, saveTransactions, setIsEditingTransactions]);
 
   if (isEditingTransactions)
     return (
-      <ButtonPrimary className={styles.footerButton} onClick={saveTransactions}>
+      <ButtonPrimary className={styles.footerButton} onClick={handleSave}>
         <IconSave className={styles.footerIcon} /> Save
       </ButtonPrimary>
     );
 
   return (
-    <ButtonPrimary className={styles.footerButton} onClick={editTransactions}>
+    <ButtonPrimary className={styles.footerButton} onClick={() => setIsEditingTransactions(true)}>
       <IconEdit className={styles.footerIcon} /> Edit transactions
     </ButtonPrimary>
   );

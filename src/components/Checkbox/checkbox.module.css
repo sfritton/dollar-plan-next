@@ -1,0 +1,55 @@
+.label {
+  display: flex;
+  align-items: flex-end;
+}
+
+.label:hover {
+  cursor: pointer;
+}
+
+.checkbox {
+  position: absolute;
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  clip: rect(0px, 0px, 0px, 0px);
+  margin: -1px;
+  overflow: hidden;
+}
+
+.visualCheckbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-x5);
+  height: var(--space-x5);
+  background: rgba(0, 0, 0, 0.125);
+  border-radius: 4px;
+  border: 1px solid var(--color-primary-light);
+  margin-right: var(--space-x2);
+  transition: var(--anim-duration-default);
+}
+
+.checkMark {
+  animation: fadeIn var(--anim-duration-default);
+}
+
+.visualCheckbox.checked {
+  background: var(--color-primary-light);
+}
+
+.label:hover .visualCheckbox {
+  /* disable other transitions on hover */
+  transition: background var(--anim-duration-default);
+  border: 1px solid var(--color-primary-lighter);
+}
+
+.label:focus-within .visualCheckbox {
+  border: 2px solid #fff;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0);
+  }
+}

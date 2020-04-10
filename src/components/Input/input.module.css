@@ -41,7 +41,7 @@
   background: #fff;
   height: 2px;
   transform: scaleX(0);
-  transition: transform 300ms;
+  transition: transform var(--anim-duration-default);
 }
 
 .base:focus-within:after {

@@ -29,6 +29,15 @@
   margin-right: var(--space-x4);
 }
 
+.checkbox {
+  margin: var(--space-x4) 0;
+}
+
+.prevBudgetSelect {
+  display: block;
+  margin: var(--space-x4) 0;
+}
+
 .button {
   display: block;
   width: 100%;

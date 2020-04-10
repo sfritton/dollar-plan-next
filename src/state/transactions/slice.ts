@@ -9,7 +9,7 @@ const initialState: Dictionary<string, StateTransaction> = {};
 
 export const name = 'transactions' as const;
 
-const groupsSlice = createSlice({
+const transactionsSlice = createSlice({
   name,
   initialState,
   reducers: {
@@ -98,4 +98,4 @@ const groupsSlice = createSlice({
   },
 });
 
-export default groupsSlice;
+export default transactionsSlice;

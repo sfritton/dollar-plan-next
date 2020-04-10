@@ -1,8 +1,9 @@
 import FetchBudget from '../../services/FetchBudget';
 import slice from './slice';
 import { AppThunk, Status } from '../types';
+import { Budget } from '../../types/budget';
 
-function fetchBudget(id: string): AppThunk {
+function fetchBudget(id: Budget.Id): AppThunk {
   return async (dispatch, getState) => {
     const { status } = getState().budgets.idMap[id] || {};
 

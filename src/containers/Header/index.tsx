@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { getMonthName } from '../../util/date';
 import SubHeader from './SubHeader';
@@ -12,11 +12,27 @@ import IconClose from '../../icons/IconClose';
 import IconSave from '../../icons/IconSave';
 import { useAction } from '../../state/hooks';
 import useBudget from '../../hooks/useBudget';
+import saveBudgetAction from '../../state/budgets/saveBudget';
+import fetchBudgetAction from '../../state/budgets/fetchBudget';
+import useBudgetId from '../../hooks/useBudgetId';
 
 function Header() {
+  const budgetId = useBudgetId();
   const budget = useBudget();
   const isAdjustingBudget = useSelector(getIsAdjustingBudget);
   const setIsAdjustingBudget = useAction(uiSlice.actions.setIsAdjustingBudget);
+  const saveBudget = useAction(saveBudgetAction);
+  const fetchBudget = useAction(fetchBudgetAction);
+
+  const handleCancel = useCallback(() => {
+    setIsAdjustingBudget(false);
+    fetchBudget(budgetId);
+  }, [setIsAdjustingBudget, fetchBudget, budgetId]);
+
+  const handleSave = useCallback(() => {
+    setIsAdjustingBudget(false);
+    saveBudget(budgetId);
+  }, [setIsAdjustingBudget, saveBudget, budgetId]);
 
   return (
     <>
@@ -24,11 +40,7 @@ function Header() {
         {budget && (
           <>
             {isAdjustingBudget ? (
-              <ButtonWithIcon
-                Icon={IconClose}
-                label="Cancel"
-                onClick={() => setIsAdjustingBudget(false)}
-              />
+              <ButtonWithIcon Icon={IconClose} label="Cancel" onClick={handleCancel} />
             ) : (
               <BudgetDrawer />
             )}
@@ -36,11 +48,7 @@ function Header() {
               {getMonthName(budget.month)} {budget.year}
             </h1>
             {isAdjustingBudget ? (
-              <ButtonWithIcon
-                Icon={IconSave}
-                label="Save changes"
-                onClick={() => setIsAdjustingBudget(false)}
-              />
+              <ButtonWithIcon Icon={IconSave} label="Save changes" onClick={handleSave} />
             ) : (
               <ButtonWithIcon
                 Icon={IconAdjust}

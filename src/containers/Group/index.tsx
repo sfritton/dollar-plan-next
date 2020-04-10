@@ -10,6 +10,7 @@ import { useAction } from '../../state/hooks';
 import groupsSlice from '../../state/groups/slice';
 import uniqueId from '../../util/uniqueId';
 import { Budget } from '../../types/budget';
+import useBudgetId from '../../hooks/useBudgetId';
 
 interface Props {
   groupId: Budget.Id;
@@ -18,6 +19,7 @@ interface Props {
 
 function Group(props: Props) {
   const { groupId, noTitle } = props;
+  const budgetId = useBudgetId();
   const getGroup = useMemo(() => makeGetGroup(groupId), [groupId]);
 
   const group = useSelector(getGroup);
@@ -37,7 +39,7 @@ function Group(props: Props) {
         {isAdjustingBudget && (
           <CardClickable
             className={styles.addCategoryButton}
-            onClick={() => addCategory({ id: uniqueId('category'), groupId })}
+            onClick={() => addCategory({ id: uniqueId('category'), groupId, budgetId })}
           >
             Add a category
           </CardClickable>
