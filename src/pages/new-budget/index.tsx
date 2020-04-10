@@ -91,7 +91,7 @@ const NewBudgetPage: NextPage = () => {
             className={styles.prevBudgetSelect}
           >
             {budgets.map(budget => (
-              <option key={budget.id}>
+              <option key={budget.id} value={budget.id}>
                 {getMonthName(budget.month)} {budget.year}
               </option>
             ))}

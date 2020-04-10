@@ -1,3 +1,7 @@
+.budgetDrawer {
+  padding-bottom: 45px;
+}
+
 .budgetDrawer > li {
   display: block;
 }
