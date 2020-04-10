@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { makeGetCategoryOptions } from './selectors';
+import { makeGetCategoryOptions } from '../../state/budgets/selectors';
 import Select, { Props as SelectProps } from '../../components/Input/Select';
 import styles from './transaction.module.css';
 import useBudgetId from '../../hooks/useBudgetId';

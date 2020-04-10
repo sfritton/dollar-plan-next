@@ -16,7 +16,12 @@ const transactionsToDeleteSlice = createSlice({
     [transactionsSlice.actions.deleteTransaction.toString()]: (
       state,
       action: PayloadAction<{ id: Budget.Id }>,
-    ) => [...state, action.payload.id],
+    ) => {
+      // ignore temporary transactions
+      if (isNaN(Number(action.payload.id))) return state;
+
+      return [...state, action.payload.id];
+    },
   },
 });
 

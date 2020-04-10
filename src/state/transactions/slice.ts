@@ -15,12 +15,17 @@ const transactionsSlice = createSlice({
   reducers: {
     createIndependentTransaction: (
       state,
-      action: PayloadAction<{ id: Budget.Id; budgetId: Budget.Id; date: SimpleDate }>,
+      action: PayloadAction<{
+        id: Budget.Id;
+        budgetId: Budget.Id;
+        date: SimpleDate;
+        categoryId: Budget.Id;
+      }>,
     ) => {
       state[action.payload.id] = {
         id: action.payload.id,
         description: '',
-        category_id: '',
+        category_id: action.payload.categoryId,
         group_id: '',
         budget_id: action.payload.budgetId,
         date: getClosestToToday(action.payload.date).getDate(),

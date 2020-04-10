@@ -1,7 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { AppState, Status } from '../types';
 import { BudgetWithMetadata } from './slice';
-import { makeGetActualAmount, makeGetPlannedAmount } from '../groups/selectors';
+import { makeGetGroup, makeGetActualAmount, makeGetPlannedAmount } from '../groups/selectors';
+import { StateGroup } from '../groups/types';
+import { makeGetCategory } from '../categories/selectors';
 import { Budget } from '../../types/budget';
 
 export const getStatus = (state: AppState) => state.budgets.status;
@@ -74,4 +76,30 @@ export const makeGetIsBalanced = (budgetId: Budget.Id) => (state: AppState) => {
   if (typeof balance === 'undefined') return undefined;
 
   return balance === 0;
+};
+
+export const makeGetCategoryOptions = (budgetId: Budget.Id) => (state: AppState) => {
+  const budget = makeGetBudget(budgetId)(state);
+
+  if (!budget || budget.status !== Status.SUCCESS) return undefined;
+
+  const groups = [...budget.incomeIds, ...budget.expenseIds].reduce<StateGroup[]>((acc, id) => {
+    const group = makeGetGroup(id)(state);
+
+    if (!group) return acc;
+
+    return [...acc, group];
+  }, []);
+
+  return groups.map(group => ({
+    id: group.id,
+    title: group.title,
+    categories: group.categoryIds.reduce<{ title: string; id: Budget.Id }[]>((acc, id) => {
+      const category = makeGetCategory(id)(state);
+
+      if (!category) return acc;
+
+      return [...acc, { title: category.title, id }];
+    }, []),
+  }));
 };

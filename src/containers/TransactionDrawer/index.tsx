@@ -5,7 +5,7 @@ import { getIsTransactionDrawerOpen } from '../../state/ui/selectors';
 import Drawer from '../../components/Drawer';
 import Footer from './Footer';
 import uiSlice from '../../state/ui/slice';
-import transactionsSlice from '../../state/transactions/slice';
+import createIndependentTransaction from '../../state/transactions/createIndependentTransaction';
 import TransactionInput from '../Transaction/TransactionInput';
 import styles from './transaction-drawer.module.css';
 import { ButtonSecondary } from '../../components/Button';
@@ -19,7 +19,7 @@ function TransactionDrawer() {
   const budget = useBudget();
 
   const closeDrawerAction = useAction(uiSlice.actions.closeTransactionDrawer);
-  const createTransaction = useAction(transactionsSlice.actions.createIndependentTransaction);
+  const createTransaction = useAction(createIndependentTransaction);
   const [transactions, setTransactions] = useState<string[]>([]);
 
   const closeDrawer = useCallback(() => {
