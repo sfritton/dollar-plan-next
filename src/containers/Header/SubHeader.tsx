@@ -13,6 +13,7 @@ import { getDollarString } from '../../util/currency';
 import { getIsAdjustingBudget } from '../../state/ui/selectors';
 import useBudgetId from '../../hooks/useBudgetId';
 import useBudget from '../../hooks/useBudget';
+import { Budget } from '../../types/budget';
 
 const getDaysLeftMessage = (budget: BudgetWithMetadata) => {
   const date = { month: budget.month, year: budget.year };
@@ -27,7 +28,7 @@ const getDaysLeftMessage = (budget: BudgetWithMetadata) => {
   return `${getDaysLeft(date)} days left`;
 };
 
-const useBalanceMessage = (budgetId: string) => {
+const useBalanceMessage = (budgetId: Budget.Id) => {
   const isAdjustingBudget = useSelector(getIsAdjustingBudget);
   const plannedBalance = useSelector(makeGetPlannedBalance(budgetId)) || 0;
   const actualBalance = useSelector(makeGetActualBalance(budgetId)) || 0;
