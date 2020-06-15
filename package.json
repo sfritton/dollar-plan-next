@@ -7,10 +7,9 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "initdb": "node tools/initdb",
     "dev": "next -p 8000",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8000",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "jest": "jest"

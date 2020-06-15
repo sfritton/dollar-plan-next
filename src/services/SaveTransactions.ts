@@ -9,7 +9,7 @@ interface SaveTransactionsBody {
 
 async function SaveTransactions(body: SaveTransactionsBody) {
   return await fetchPost<SaveTransactionsBody, Budget.BudgetResponse>(
-    'http://localhost:3000/transactions',
+    `${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/transactions`,
     body,
   );
 }

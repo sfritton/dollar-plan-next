@@ -11,7 +11,7 @@ interface PutRequestBody {
 
 async function SaveBudget(body: PutRequestBody) {
   return await fetchPut<PutRequestBody, Budget.BudgetResponse>(
-    'http://localhost:3000/budgets',
+    `${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/budgets`,
     body,
   );
 }

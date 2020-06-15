@@ -8,7 +8,7 @@ interface CreateBudgetOptions extends Omit<Budget.Budget, 'id'> {
 
 async function CreateBudget(options: CreateBudgetOptions) {
   return await fetchPost<Omit<Budget.Budget, 'id'>, { id: number }>(
-    'http://localhost:3000/budgets',
+    `${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/budgets`,
     options,
   );
 }

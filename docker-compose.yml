@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  app:
+    build: ./
+    ports:
+      - 8000:8000
+    environment:
+      SERVER_HOST: server
+    env_file:
+      - .env
+
+  server:
+    image: node:12-alpine
+    command: sh -c "npm install && npm run start"
+    working_dir: /server
+    volumes:
+      - ./packages/server:/server
+    environment:
+      PGHOST: db
+    env_file:
+      - .env
+
+  db:
+    image: postgres
+    volumes:
+      - dollar-plan-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${PGPASSWORD}
+
+volumes:
+  dollar-plan-db-data:
