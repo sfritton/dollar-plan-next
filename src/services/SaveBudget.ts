@@ -10,10 +10,7 @@ interface PutRequestBody {
 }
 
 async function SaveBudget(body: PutRequestBody) {
-  return await fetchPut<PutRequestBody, Budget.BudgetResponse>(
-    `${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/budgets`,
-    body,
-  );
+  return await fetchPut<PutRequestBody, Budget.BudgetResponse>('/budgets', body);
 }
 
 export default SaveBudget;

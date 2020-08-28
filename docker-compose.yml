@@ -1,17 +1,18 @@
-version: "3.7"
+version: '3.7'
 
 services:
   app:
     build: ./
+    depends_on:
+      - server
+      - db
     ports:
-      - 8000:8000
-    environment:
-      SERVER_HOST: server
-    env_file:
-      - .env
+      - 80:8000
 
   server:
     image: node:12-alpine
+    ports:
+      - 3000:3000
     command: sh -c "npm install && npm run start"
     working_dir: /server
     volumes:

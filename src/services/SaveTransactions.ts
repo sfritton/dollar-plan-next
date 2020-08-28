@@ -8,10 +8,7 @@ interface SaveTransactionsBody {
 }
 
 async function SaveTransactions(body: SaveTransactionsBody) {
-  return await fetchPost<SaveTransactionsBody, Budget.BudgetResponse>(
-    `${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/transactions`,
-    body,
-  );
+  return await fetchPost<SaveTransactionsBody, Budget.BudgetResponse>('/transactions', body);
 }
 
 export default SaveTransactions;

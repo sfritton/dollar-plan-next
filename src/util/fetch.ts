@@ -1,7 +1,8 @@
 const headers = { 'Content-Type': 'application/json' };
+const makeUrl = (path: string) => `http://${location.host}:3000${path}`;
 
-export async function fetchGet<R>(url: string) {
-  const response = await fetch(url);
+export async function fetchGet<R>(path: string) {
+  const response = await fetch(makeUrl(path));
 
   if (!response.ok) throw new Error(response.statusText);
 
@@ -10,8 +11,12 @@ export async function fetchGet<R>(url: string) {
   return data as R;
 }
 
-export async function fetchPost<B, R>(url: string, body: B) {
-  const request = new Request(url, { method: 'POST', body: JSON.stringify(body), headers });
+export async function fetchPost<B, R>(path: string, body: B) {
+  const request = new Request(makeUrl(path), {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers,
+  });
   const response = await fetch(request);
 
   if (!response.ok) throw new Error(response.statusText);
@@ -21,8 +26,12 @@ export async function fetchPost<B, R>(url: string, body: B) {
   return data as R;
 }
 
-export async function fetchPut<B, R>(url: string, body: B) {
-  const request = new Request(url, { method: 'PUT', body: JSON.stringify(body), headers });
+export async function fetchPut<B, R>(path: string, body: B) {
+  const request = new Request(makeUrl(path), {
+    method: 'PUT',
+    body: JSON.stringify(body),
+    headers,
+  });
   const response = await fetch(request);
 
   if (!response.ok) throw new Error(response.statusText);

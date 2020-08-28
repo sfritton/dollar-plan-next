@@ -3,3 +3,8 @@ node_modules/
 .env
 .vscode/
 .DS_Store
+
+# server
+packages/server/node_modules/
+packages/server/dist/
+sample.*
