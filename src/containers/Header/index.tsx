@@ -15,6 +15,8 @@ import useBudget from '../../hooks/useBudget';
 import saveBudgetAction from '../../state/budgets/saveBudget';
 import fetchBudgetAction from '../../state/budgets/fetchBudget';
 import useBudgetId from '../../hooks/useBudgetId';
+import groupsSlice from '../../state/groups/slice';
+import categoriesSlice from '../../state/categories/slice';
 
 function Header() {
   const budgetId = useBudgetId();
@@ -23,11 +25,15 @@ function Header() {
   const setIsAdjustingBudget = useAction(uiSlice.actions.setIsAdjustingBudget);
   const saveBudget = useAction(saveBudgetAction);
   const fetchBudget = useAction(fetchBudgetAction);
+  const resetGroups = useAction(groupsSlice.actions.resetGroups);
+  const resetCategories = useAction(categoriesSlice.actions.resetCategories);
 
   const handleCancel = useCallback(() => {
     setIsAdjustingBudget(false);
     fetchBudget(budgetId);
-  }, [setIsAdjustingBudget, fetchBudget, budgetId]);
+    resetGroups();
+    resetCategories();
+  }, [setIsAdjustingBudget, fetchBudget, resetGroups, resetCategories, budgetId]);
 
   const handleSave = useCallback(() => {
     setIsAdjustingBudget(false);

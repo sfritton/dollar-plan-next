@@ -29,6 +29,15 @@ const groupsSlice = createSlice({
 
       group.categoryIds = [...group.categoryIds, action.payload.id];
     },
+    resetGroups: state => {
+      Object.keys(state).forEach(id => {
+        const group = state[id];
+        if (!group) return;
+
+        group.isNew = false;
+        group.isUpdated = false;
+      });
+    },
   },
 
   extraReducers: {
@@ -50,11 +59,13 @@ const groupsSlice = createSlice({
       state,
       action: PayloadAction<{ budget_id: number; is_income: boolean; id: Budget.Id }>,
     ) => {
+      const maxSort = Math.max(...Object.values(state).map(group => group?.sort ?? 0), 0);
+
       state[action.payload.id] = {
         budget_id: action.payload.budget_id,
         is_income: action.payload.is_income,
         title: '',
-        sort: 0,
+        sort: maxSort + 1,
         id: action.payload.id,
         isNew: true,
         categoryIds: [],

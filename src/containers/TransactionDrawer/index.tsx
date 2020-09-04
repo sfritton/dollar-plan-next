@@ -12,6 +12,7 @@ import { ButtonSecondary } from '../../components/Button';
 import uniqueId from '../../util/uniqueId';
 import useBudgetId from '../../hooks/useBudgetId';
 import useBudget from '../../hooks/useBudget';
+import transactionsSlice from '../../state/transactions/slice';
 
 function TransactionDrawer() {
   const isOpen = useSelector(getIsTransactionDrawerOpen);
@@ -20,12 +21,14 @@ function TransactionDrawer() {
 
   const closeDrawerAction = useAction(uiSlice.actions.closeTransactionDrawer);
   const createTransaction = useAction(createIndependentTransaction);
+  const resetTransactions = useAction(transactionsSlice.actions.resetTransactions);
   const [transactions, setTransactions] = useState<string[]>([]);
 
   const closeDrawer = useCallback(() => {
     closeDrawerAction();
     setTransactions([]);
-  }, [closeDrawerAction, setTransactions]);
+    resetTransactions();
+  }, [closeDrawerAction, setTransactions, resetTransactions]);
 
   const addTransaction = useCallback(() => {
     if (!budget) return;
@@ -43,7 +46,12 @@ function TransactionDrawer() {
   }, [isOpen, addTransaction]);
 
   return (
-    <Drawer title="Add transactions" isOpen={isOpen} onClose={closeDrawer} Footer={Footer}>
+    <Drawer
+      title="Add transactions"
+      isOpen={isOpen}
+      onClose={closeDrawer}
+      Footer={props => <Footer {...props} onSave={closeDrawer} />}
+    >
       <ul>
         {transactions.map(id => (
           <TransactionInput key={id} id={id} />

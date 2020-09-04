@@ -5,6 +5,8 @@ import { StateGroup } from '../groups/types';
 import { StateCategory } from '../categories/types';
 import SaveBudget from '../../services/SaveBudget';
 import slice from './slice';
+import groupsSlice from '../groups/slice';
+import categoriesSlice from '../categories/slice';
 
 function saveBudget(id: Budget.Id): AppThunk {
   const getModified = makeGetModified(id);
@@ -16,6 +18,9 @@ function saveBudget(id: Budget.Id): AppThunk {
 
     try {
       const budget = await SaveBudget({ id, groups, categories });
+
+      dispatch(groupsSlice.actions.resetGroups());
+      dispatch(categoriesSlice.actions.resetCategories());
 
       dispatch(slice.actions.addBudgetSuccess({ id, budget }));
     } catch (error) {

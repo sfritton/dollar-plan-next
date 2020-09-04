@@ -14,8 +14,6 @@ export const registerRoutes = (app: Express.Application) => {
     user: process.env.PGUSER || 'postgres',
   };
 
-  console.log({ config });
-
   const pgp = pgPromise();
   const db = pgp(config);
 

@@ -24,18 +24,23 @@ const NewBudgetPage: NextPage = () => {
 
   const fetchBudgets = useAction(fetchBudgetsAction);
 
-  useEffect(() => {
-    if (status === Status.INIT) {
-      fetchBudgets();
-    }
-  }, [status, fetchBudgets]);
-
   const [chosenMonth, setChosenMonth] = useState(1);
   const [chosenYear, setChosenYear] = useState(currentYear);
   const [isCopying, setIsCopying] = useState(false);
   const [prevBudgetId, setPrevBudgetId] = useState<Budget.Id>();
 
+  useEffect(() => {
+    if (status === Status.INIT) {
+      fetchBudgets();
+    }
+    if (status === Status.SUCCESS) {
+      setPrevBudgetId(budgets[0].id);
+    }
+  }, [status, fetchBudgets, setPrevBudgetId, budgets]);
+
   const handleCreateBudget = useCallback(async () => {
+    if (isCopying && typeof prevBudgetId === undefined) return;
+
     const { id } = await CreateBudget({
       month: chosenMonth,
       year: chosenYear,

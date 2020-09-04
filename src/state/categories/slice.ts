@@ -37,6 +37,15 @@ const categoriesSlice = createSlice({
       category.notes = action.payload.notes;
       category.isUpdated = true;
     },
+    resetCategories: state => {
+      Object.keys(state).forEach(id => {
+        const category = state[id];
+        if (!category) return;
+
+        category.isNew = false;
+        category.isUpdated = false;
+      });
+    },
     createTransaction: (
       state,
       action: PayloadAction<{
@@ -72,12 +81,15 @@ const categoriesSlice = createSlice({
       state,
       action: PayloadAction<{ id: Budget.Id; groupId: Budget.Id; budgetId: Budget.Id }>,
     ) => {
+      const maxSort = Math.max(...Object.values(state).map(category => category?.sort ?? 0), 0);
+
       state[action.payload.id] = {
+        isNew: true,
         id: action.payload.id,
         title: '',
         planned_amount: 0,
         notes: '',
-        sort: 0,
+        sort: maxSort + 1,
         budget_id: action.payload.budgetId,
         group_id: action.payload.groupId,
         transactionIds: [],

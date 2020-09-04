@@ -9,17 +9,20 @@ import IconEdit from '../../icons/IconEdit';
 import styles from '../../components/Drawer/drawer.module.css';
 import saveTransactionsAction from '../../state/budgets/saveTransactions';
 import useBudgetId from '../../hooks/useBudgetId';
+import transactionsSlice from '../../state/transactions/slice';
 
 const Footer: React.FC = () => {
   const budgetId = useBudgetId();
   const isEditingTransactions = useSelector(getIsEditingTransactions);
   const setIsEditingTransactions = useAction(uiSlice.actions.setIsEditingTransactions);
   const saveTransactions = useAction(saveTransactionsAction);
+  const resetTransactions = useAction(transactionsSlice.actions.resetTransactions);
 
   const handleSave = useCallback(() => {
     saveTransactions(budgetId);
+    resetTransactions();
     setIsEditingTransactions(false);
-  }, [budgetId, saveTransactions, setIsEditingTransactions]);
+  }, [budgetId, saveTransactions, setIsEditingTransactions, resetTransactions]);
 
   if (isEditingTransactions)
     return (

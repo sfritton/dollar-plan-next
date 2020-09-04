@@ -1,5 +1,5 @@
-import arrayToMap from "../util/arrayToMap";
-import { PostgresDB } from "../types";
+import arrayToMap from '../util/arrayToMap';
+import { PostgresDB } from '../types';
 
 export async function getBudgetQuery(db: PostgresDB, id: string) {
   return await db.one<Budget.Budget>(
@@ -8,7 +8,7 @@ export async function getBudgetQuery(db: PostgresDB, id: string) {
       FROM budgets
       WHERE id = $[id]
     `,
-    { id }
+    { id },
   );
 }
 
@@ -20,7 +20,7 @@ export async function getBudgetGroupsQuery(db: PostgresDB, id: string) {
       WHERE budget_id = $[id]
       ORDER BY sort
     `,
-    { id }
+    { id },
   );
 }
 
@@ -32,7 +32,7 @@ export async function getBudgetCategoriesQuery(db: PostgresDB, id: string) {
       WHERE budget_id = $[id]
       ORDER BY sort
     `,
-    { id }
+    { id },
   );
 }
 
@@ -44,26 +44,21 @@ export async function getBudgetTransactionsQuery(db: PostgresDB, id: string) {
       WHERE budget_id = $[id]
       ORDER BY date
     `,
-    { id }
+    { id },
   );
 }
 
-export async function getBudgetById(
-  db: PostgresDB,
-  id: string
-): Promise<Budget.BudgetResponse> {
+export async function getBudgetById(db: PostgresDB, id: string): Promise<Budget.BudgetResponse> {
   const [budget, groupList, categoryList, transactionList] = await Promise.all([
     getBudgetQuery(db, id),
     getBudgetGroupsQuery(db, id),
     getBudgetCategoriesQuery(db, id),
-    getBudgetTransactionsQuery(db, id)
+    getBudgetTransactionsQuery(db, id),
   ] as const);
 
-  const groups = arrayToMap(
-    groupList.map(group => ({ ...group, categoryIds: [] }))
-  );
+  const groups = arrayToMap(groupList.map(group => ({ ...group, categoryIds: [] })));
   const categories = arrayToMap(
-    categoryList.map(category => ({ ...category, transactionIds: [] }))
+    categoryList.map(category => ({ ...category, transactionIds: [] })),
   );
   const transactions = arrayToMap(transactionList);
 
@@ -74,20 +69,25 @@ export async function getBudgetById(
   for (const category of categoryList) {
     groups[category.group_id].categoryIds.push(category.id);
   }
-  const { incomeIds, expenseIds } = groupList.reduce((
-    acc: { incomeIds: number[], expenseIds: number[] },
-    { id, is_income }
-  ) => ({
-    incomeIds: is_income ? [...acc.incomeIds, id] : acc.incomeIds,
-    expenseIds: is_income ? acc.expenseIds : [...acc.expenseIds, id]
-  }), { incomeIds: [], expenseIds: []});
+
+  Object.keys(groups).forEach(groupId => {
+    groups[groupId].categoryIds.sort((a, b) => categories[a].sort - categories[b].sort);
+  });
+
+  const { incomeIds, expenseIds } = groupList.reduce<{ incomeIds: number[]; expenseIds: number[] }>(
+    (acc, { id, is_income }) => ({
+      incomeIds: is_income ? [...acc.incomeIds, id] : acc.incomeIds,
+      expenseIds: is_income ? acc.expenseIds : [...acc.expenseIds, id],
+    }),
+    { incomeIds: [], expenseIds: [] },
+  );
 
   return {
     ...budget,
-    incomeIds,
-    expenseIds,
+    incomeIds: incomeIds.sort((a, b) => groups[a].sort - groups[b].sort),
+    expenseIds: expenseIds.sort((a, b) => groups[a].sort - groups[b].sort),
     groups,
     categories,
-    transactions
+    transactions,
   };
 }

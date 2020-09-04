@@ -1,17 +1,17 @@
-import * as Express from "express";
-import { NOT_FOUND_MESSAGE } from "./constants";
-import { PostgresDB } from "../types";
-import { getAllBudgets } from "../queries/getAllBudgets";
-import { getBudgetById } from "../queries/getBudgetById";
-import { createBudget } from "../queries/createBudget";
-import { saveLegacyBudget } from "../queries/saveLegacyBudget";
-import { createGroup } from "../queries/createGroup";
-import { updateGroup } from "../queries/updateGroup";
-import { createCategory } from "../queries/createCategory";
-import { updateCategory } from "../queries/updateCategory";
-import { copyBudget } from "../queries/copyBudget";
+import * as Express from 'express';
+import { NOT_FOUND_MESSAGE } from './constants';
+import { PostgresDB } from '../types';
+import { getAllBudgets } from '../queries/getAllBudgets';
+import { getBudgetById } from '../queries/getBudgetById';
+import { createBudget } from '../queries/createBudget';
+import { saveLegacyBudget } from '../queries/saveLegacyBudget';
+import { createGroup } from '../queries/createGroup';
+import { updateGroup } from '../queries/updateGroup';
+import { createCategory } from '../queries/createCategory';
+import { updateCategory } from '../queries/updateCategory';
+import { copyBudget } from '../queries/copyBudget';
 
-const path = "/budgets" as const;
+const path = '/budgets' as const;
 
 interface Modified {
   isNew?: boolean;
@@ -95,7 +95,7 @@ export const registerRoutes = (app: Express.Application, db: PostgresDB) => {
 
       // Create or update groups, and store their ids
       const groupIds = await Promise.all(
-        groups.map(async (group) => {
+        groups.map(async group => {
           if (group.isNew) {
             const { id } = await createGroup(db, group);
             return { id, tempId: group.id };
@@ -104,7 +104,7 @@ export const registerRoutes = (app: Express.Application, db: PostgresDB) => {
           if (group.isUpdated) await updateGroup(db, group);
 
           return { id: group.id, tempId: group.id };
-        })
+        }),
       );
 
       const groupIdMap = groupIds.reduce<Record<string, number>>(
@@ -112,23 +112,23 @@ export const registerRoutes = (app: Express.Application, db: PostgresDB) => {
           ...acc,
           [tempId]: Number(id),
         }),
-        {}
+        {},
       );
 
       // Replace any temporary group_ids before updating categories
       await Promise.all(
-        categories.map((category) => {
+        categories.map(category => {
           if (category.isNew)
             return createCategory(db, {
               ...category,
-              group_id: groupIdMap[category.group_id],
+              group_id: groupIdMap[category.group_id] ?? category.group_id,
             });
           if (category.isUpdated)
             return updateCategory(db, {
               ...category,
-              group_id: groupIdMap[category.group_id],
+              group_id: groupIdMap[category.group_id] ?? category.group_id,
             });
-        })
+        }),
       );
 
       const budget = await getBudgetById(db, String(id));

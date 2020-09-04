@@ -64,6 +64,15 @@ const transactionsSlice = createSlice({
     deleteTransaction: (state, action: PayloadAction<{ id: Budget.Id }>) => {
       state[action.payload.id] = undefined;
     },
+    resetTransactions: state => {
+      Object.keys(state).forEach(id => {
+        const transaction = state[id];
+        if (!transaction) return;
+
+        transaction.isNew = false;
+        transaction.isUpdated = false;
+      });
+    },
   },
   extraReducers: {
     [budgetsSlice.actions.addBudgetSuccess.toString()]: (
