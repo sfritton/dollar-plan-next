@@ -1,11 +1,11 @@
-import * as Express from "express";
-import { PostgresDB } from "../types";
-import { createGroup } from "../queries/createGroup";
-import { updateGroup } from "../queries/updateGroup";
-import { getGroups } from "../queries/getGroups";
+import * as Express from 'express';
+import { PostgresDB } from '../types';
+import { createGroup } from '../queries/createGroup';
+import { updateGroup } from '../queries/updateGroup';
+import { getGroups } from '../queries/getGroups';
 
 export const registerRoutes = (app: Express.Application, db: PostgresDB) => {
-  app.get("/groups", async (req, res) => {
+  app.get('/groups', async (req, res) => {
     try {
       const groups = await getGroups(db);
       return res.json(groups);
@@ -18,7 +18,7 @@ export const registerRoutes = (app: Express.Application, db: PostgresDB) => {
     }
   });
 
-  app.post("/groups", async (req, res) => {
+  app.post('/groups', async (req, res) => {
     try {
       const id = await createGroup(db, req.body);
       return res.json(id);
@@ -31,10 +31,10 @@ export const registerRoutes = (app: Express.Application, db: PostgresDB) => {
     }
   });
 
-  app.put("/groups", async (req, res) => {
+  app.put('/groups', async (req, res) => {
     try {
       await updateGroup(db, req.body);
-      return res.json("success");
+      return res.json('success');
     } catch (err) {
       // tslint:disable-next-line:no-console
       console.error(err);

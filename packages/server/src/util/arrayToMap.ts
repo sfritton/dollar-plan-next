@@ -5,8 +5,8 @@ export default function<T extends ObjectWithId>(arr: T[]) {
   return arr.reduce(
     (accumulator, item) => ({
       [item.id]: item,
-      ...accumulator
+      ...accumulator,
     }),
-    emptyMap
+    emptyMap,
   );
 }

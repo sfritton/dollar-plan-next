@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
-import fs from "fs-extra";
-import { Client } from "pg";
+import dotenv from 'dotenv';
+import fs from 'fs-extra';
+import { Client } from 'pg';
 
 const init = async () => {
   // read environment variables
@@ -14,8 +14,8 @@ const init = async () => {
     await client.connect();
 
     // read the contents of the initdb.pgsql file
-    const sql = await fs.readFile("./tools/initdb.pgsql", {
-      encoding: "UTF-8"
+    const sql = await fs.readFile('./tools/initdb.pgsql', {
+      encoding: 'UTF-8',
     });
 
     // split the file into separate statements
@@ -38,8 +38,8 @@ const init = async () => {
 
 init()
   .then(() => {
-    console.log("finished");
+    console.log('finished');
   })
   .catch(() => {
-    console.log("finished with errors");
+    console.log('finished with errors');
   });

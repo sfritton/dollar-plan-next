@@ -1,4 +1,4 @@
-import { PostgresDB } from "../types";
+import { PostgresDB } from '../types';
 
 export async function getAllBudgets(db: PostgresDB) {
   return await db.any<Budget.Budget>(
@@ -6,6 +6,6 @@ export async function getAllBudgets(db: PostgresDB) {
       SELECT *
       FROM budgets
       ORDER BY year DESC, month DESC
-    `
+    `,
   );
 }

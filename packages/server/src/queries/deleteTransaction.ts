@@ -1,4 +1,4 @@
-import { PostgresDB } from "../types";
+import { PostgresDB } from '../types';
 
 export async function deleteTransaction(db: PostgresDB, id: number) {
   return await db.none(
@@ -6,6 +6,6 @@ export async function deleteTransaction(db: PostgresDB, id: number) {
       DELETE FROM transactions
       WHERE id = $[id]
     `,
-    { id }
+    { id },
   );
 }

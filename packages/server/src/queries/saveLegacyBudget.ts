@@ -1,25 +1,22 @@
-import { PostgresDB } from "../types";
-import { createBudget } from "./createBudget";
-import { createGroup } from "./createGroup";
-import { createCategory } from "./createCategory";
-import { createTransaction } from "./createTransaction";
+import { PostgresDB } from '../types';
+import { createBudget } from './createBudget';
+import { createGroup } from './createGroup';
+import { createCategory } from './createCategory';
+import { createTransaction } from './createTransaction';
 
-export async function saveLegacyBudget(
-  db: PostgresDB,
-  budget: BudgetLegacy.Budget
-) {
+export async function saveLegacyBudget(db: PostgresDB, budget: BudgetLegacy.Budget) {
   // save the budget
   const { id: budget_id } = await createBudget(db, budget.date);
 
   await Promise.all(
     Object.entries(budget.categoryGroups).map(async ([key, group], sort) => {
-      const is_income = key === "income";
+      const is_income = key === 'income';
       // save each group
       const { id: group_id } = await createGroup(db, {
         budget_id,
         title: group.title,
         is_income,
-        sort
+        sort,
       });
 
       return await Promise.all(
@@ -30,8 +27,8 @@ export async function saveLegacyBudget(
             group_id,
             title: category.title,
             planned_amount: category.plannedAmount,
-            notes: category.notes ?? "",
-            sort
+            notes: category.notes ?? '',
+            sort,
           });
 
           return await Promise.all(
@@ -43,13 +40,13 @@ export async function saveLegacyBudget(
                 category_id,
                 amount: transaction.amount,
                 description: transaction.description,
-                date: transaction.date
-              })
-            )
+                date: transaction.date,
+              }),
+            ),
           );
-        })
+        }),
       );
-    })
+    }),
   );
 
   return budget_id;

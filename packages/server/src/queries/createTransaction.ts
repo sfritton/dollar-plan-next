@@ -1,8 +1,8 @@
-import { PostgresDB, ID } from "../types";
+import { PostgresDB, ID } from '../types';
 
 export async function createTransaction(
   db: PostgresDB,
-  transaction: Omit<Budget.Transaction, "id">
+  transaction: Omit<Budget.Transaction, 'id'>,
 ) {
   return await db.one<ID>(
     `
@@ -10,6 +10,6 @@ export async function createTransaction(
       VALUES($[budget_id], $[group_id], $[category_id], $[amount], $[date], $[description])
       RETURNING id;
     `,
-    transaction
+    transaction,
   );
 }

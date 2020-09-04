@@ -1,4 +1,4 @@
-import { PostgresDB } from "../types";
+import { PostgresDB } from '../types';
 
 export async function updateGroup(db: PostgresDB, group: Budget.Group) {
   return await db.none(
@@ -7,6 +7,6 @@ export async function updateGroup(db: PostgresDB, group: Budget.Group) {
       SET title = $[title], is_income = $[is_income], sort = $[sort]
       WHERE id = $[id]
     `,
-    group
+    group,
   );
 }
