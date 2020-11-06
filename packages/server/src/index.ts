@@ -16,7 +16,7 @@ app.use(express.json());
 
 // TODO: may need to revisit this
 // Enable cors for all routes
-app.use(cors({ origin: 'http://localhost' }));
+app.use(cors());
 
 // define route handlers
 registerRoutes(app);

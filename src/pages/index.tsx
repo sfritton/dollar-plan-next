@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { useSelector } from 'react-redux';
-import { Status } from '../../state/types';
-import { getStatus, selectBudgets } from '../../state/budgets/selectors';
-import fetchBudgetsAction from '../../state/budgets/fetchBudgets';
+import { Status } from '../state/types';
+import { getStatus, selectBudgets } from '../state/budgets/selectors';
+import fetchBudgetsAction from '../state/budgets/fetchBudgets';
 import styles from './index.module.css';
-import { LinkOutline, LinkPrimary } from '../../components/Button/Link';
-import { useAction } from '../../state/hooks';
+import { LinkOutline, LinkPrimary } from '../components/Button/Link';
+import { useAction } from '../state/hooks';
 
 const HomePage: NextPage = () => {
   const status = useSelector(getStatus);

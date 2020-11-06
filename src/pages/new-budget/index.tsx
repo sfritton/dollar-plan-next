@@ -34,7 +34,7 @@ const NewBudgetPage: NextPage = () => {
       fetchBudgets();
     }
     if (status === Status.SUCCESS) {
-      setPrevBudgetId(budgets[0].id);
+      setPrevBudgetId(budgets.length > 0 ? budgets[0].id : undefined);
     }
   }, [status, fetchBudgets, setPrevBudgetId, budgets]);
 
@@ -82,12 +82,14 @@ const NewBudgetPage: NextPage = () => {
             ))}
           </Select>
         </div>
-        <Checkbox
-          className={styles.checkbox}
-          label="Copy an existing budget"
-          checked={isCopying}
-          onChange={setIsCopying}
-        />
+        {budgets.length > 0 && (
+          <Checkbox
+            className={styles.checkbox}
+            label="Copy an existing budget"
+            checked={isCopying}
+            onChange={setIsCopying}
+          />
+        )}
         {isCopying && (
           <Select
             value={String(prevBudgetId)}
