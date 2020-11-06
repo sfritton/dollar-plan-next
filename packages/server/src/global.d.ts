@@ -19,6 +19,7 @@ declare namespace Budget {
 
   interface CategoryResponse extends Category {
     transactionIds: number[];
+    actual_amount: number;
   }
 
   interface Group {

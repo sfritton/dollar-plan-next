@@ -88,6 +88,7 @@ const categoriesSlice = createSlice({
         id: action.payload.id,
         title: '',
         planned_amount: 0,
+        actual_amount: 0,
         notes: '',
         sort: maxSort + 1,
         budget_id: action.payload.budgetId,

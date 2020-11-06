@@ -20,6 +20,7 @@ export namespace Budget {
 
   export interface CategoryResponse extends Category {
     transactionIds: Id[];
+    actual_amount: number;
   }
 
   export interface Group {

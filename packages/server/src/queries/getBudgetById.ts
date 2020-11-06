@@ -58,12 +58,13 @@ export async function getBudgetById(db: PostgresDB, id: string): Promise<Budget.
 
   const groups = arrayToMap(groupList.map(group => ({ ...group, categoryIds: [] })));
   const categories = arrayToMap(
-    categoryList.map(category => ({ ...category, transactionIds: [] })),
+    categoryList.map(category => ({ ...category, transactionIds: [], actual_amount: 0 })),
   );
   const transactions = arrayToMap(transactionList);
 
   for (const transaction of transactionList) {
     categories[transaction.category_id].transactionIds.push(transaction.id);
+    categories[transaction.category_id].actual_amount += transaction.amount;
   }
 
   for (const category of categoryList) {
