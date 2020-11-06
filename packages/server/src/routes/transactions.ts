@@ -5,6 +5,7 @@ import { createTransaction } from '../queries/createTransaction';
 import { getBudgetById } from '../queries/getBudgetById';
 import { updateTransaction } from '../queries/updateTransaction';
 import { deleteTransaction } from '../queries/deleteTransaction';
+import { searchTransactions } from '../queries/searchTransactions';
 
 interface Modified {
   isNew?: boolean;
@@ -17,6 +18,21 @@ interface SaveTransactionsBody {
 }
 
 export const registerRoutes = (app: Express.Application, db: PostgresDB) => {
+  app.get('/transactions/search/:searchTerm', async (req, res) => {
+    const searchTerm = req.params.searchTerm;
+
+    try {
+      const transactions = await searchTransactions(db, searchTerm);
+      return res.json(transactions);
+    } catch (error) {
+      // tslint:disable-next-line:no-console
+      console.error(error);
+
+      res.status(500);
+      res.json({ error: error.message || error });
+    }
+  });
+
   app.get('/transactions', async (req, res) => {
     try {
       const transactions = await getTransactions(db);
