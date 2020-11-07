@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Status } from '../../state/types';
 import { useAction } from '../../state/hooks';
 import fetchBudgetAction from '../../state/budgets/fetchBudget';
-import Header from '../../containers/Header';
+import Header from '../../containers/HeaderLegacy';
 import BudgetPageContent from '../../containers/BudgetPageContent';
 import Layout from '../../components/Layout';
 import uiSlice from '../../state/ui/slice';
