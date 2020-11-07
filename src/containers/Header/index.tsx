@@ -17,8 +17,6 @@ const Header: React.FC<Props> = ({ title, children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const hasSubheader = children || isMedium;
 
-  console.log({ children });
-
   return (
     <>
       <Head>

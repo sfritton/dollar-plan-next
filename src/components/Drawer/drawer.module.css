@@ -20,6 +20,7 @@
   top: 0;
   bottom: 0;
   background: var(--color-primary-dark);
+  color: var(--color-primary-dark-text);
   width: 100vw;
   transform: translateX(375px);
   transition: all var(--anim-duration-default);
