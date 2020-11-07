@@ -45,13 +45,18 @@ export const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({
   </ButtonBase>
 );
 
-export const ButtonFloatingAction: React.FC<ButtonWithIconProps> = ({
+interface ButtonFloatingActionProps extends ButtonWithIconProps {
+  side?: 'left' | 'right';
+}
+
+export const ButtonFloatingAction: React.FC<ButtonFloatingActionProps> = ({
   className,
   Icon,
   label,
+  side = 'right',
   ...restProps
 }) => (
-  <ButtonBase {...restProps} className={classNames(styles.floatingAction, className)}>
+  <ButtonBase {...restProps} className={classNames(styles[side], styles.floatingAction, className)}>
     <Icon />
     <div className={styles.floatingActionLabel}>{label}</div>
   </ButtonBase>

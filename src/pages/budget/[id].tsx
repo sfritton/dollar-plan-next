@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { NextPage } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Status } from '../../state/types';
 import { useAction } from '../../state/hooks';
 import fetchBudgetAction from '../../state/budgets/fetchBudget';
-import Header from '../../containers/HeaderLegacy';
+import { makeGetIsBalanced } from '../../state/budgets/selectors';
+import Header from '../../containers/Header';
 import BudgetPageContent from '../../containers/BudgetPageContent';
 import Layout from '../../components/Layout';
 import uiSlice from '../../state/ui/slice';
@@ -13,11 +14,12 @@ import { BudgetLoaded, BudgetUnloaded } from '../../state/budgets/slice';
 import { getMonthName } from '../../util/date';
 import useBudgetId from '../../hooks/useBudgetId';
 import useBudget from '../../hooks/useBudget';
+import { getDaysLeftMessage, useBalanceMessage } from './util';
 
 const getPageTitle = (budget?: BudgetLoaded | BudgetUnloaded) => {
-  if (!budget || budget.status !== Status.SUCCESS) return 'Dollar Plan';
+  if (!budget || budget.status !== Status.SUCCESS) return '';
 
-  return `${getMonthName(budget.month)} ${budget.year} | Dollar Plan`;
+  return `${getMonthName(budget.month)} ${budget.year}`;
 };
 
 const BudgetPage: NextPage = () => {
@@ -29,6 +31,8 @@ const BudgetPage: NextPage = () => {
 
   const adjusting = router.query.adjusting;
   const setIsAdjustingBudget = useAction(uiSlice.actions.setIsAdjustingBudget);
+  const balanceMessage = useBalanceMessage(budgetId);
+  const isBalanced = useSelector(makeGetIsBalanced(budgetId));
 
   useEffect(() => {
     if (adjusting) setIsAdjustingBudget(true);
@@ -44,11 +48,11 @@ const BudgetPage: NextPage = () => {
 
   return (
     <Layout.Grid>
-      <Head>
-        <title>{getPageTitle(budget)}</title>
-      </Head>
       <Layout.Header>
-        <Header />
+        <Header title={getPageTitle(budget)}>
+          <span>{balanceMessage}, </span>
+          {isBalanced && budget && <span>{getDaysLeftMessage(budget)}</span>}
+        </Header>
       </Layout.Header>
       <Layout.Content>
         <BudgetPageContent budget={budget} />

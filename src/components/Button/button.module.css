@@ -84,24 +84,33 @@
   display: flex;
   align-items: center;
   bottom: var(--space-x4);
-  right: var(--space-x4);
   height: 48px;
   border-radius: 24px;
   padding: var(--space-x3);
   box-shadow: 0 var(--space-x1) var(--space-x2) var(--space-x1) var(--color-shadow);
 }
 
+.floatingAction.left {
+  left: var(--space-x4);
+}
+
+.floatingAction.right {
+  right: var(--space-x4);
+}
+
 .floatingAction .floatingActionLabel {
   max-width: 0;
   opacity: 0;
+  margin-left: 0;
   overflow: hidden;
-  transition: max-width var(--anim-duration-long) ease, opacity var(--anim-duration-long) ease;
+  transition: all var(--anim-duration-long) ease;
   white-space: nowrap;
 }
 
 .floatingAction:focus .floatingActionLabel,
 .floatingAction:active .floatingActionLabel,
 .floatingAction:hover .floatingActionLabel {
+  margin-left: var(--space-x1);
   max-width: 140px;
   opacity: 1;
 }
