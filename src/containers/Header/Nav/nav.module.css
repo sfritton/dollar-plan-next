@@ -1,0 +1,30 @@
+.list {
+  display: flex;
+}
+
+.list li {
+  margin-right: var(--space-x2);
+}
+
+a.navLink,
+a:visited.navLink {
+  text-decoration: none;
+}
+
+button.navLink {
+  background: transparent;
+  border: none;
+  font-size: inherit;
+  display: inline;
+  padding: 0;
+}
+
+.navLink {
+  color: inherit;
+}
+
+.navLink:hover {
+  color: #000;
+  cursor: pointer;
+  text-decoration: underline;
+}

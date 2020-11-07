@@ -68,7 +68,7 @@ html {
 
 body {
   color: var(--color-primary-text);
-  background: var(--color-primary);
+  background: var(--color-primary-dark);
   font-family: Arial;
   margin: 0;
 }
