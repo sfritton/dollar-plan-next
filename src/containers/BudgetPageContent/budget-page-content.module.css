@@ -8,3 +8,34 @@
 .addButton {
   margin-top: var(--space-x4);
 }
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerContent:not(.isBalanced) {
+  background: var(--color-danger-light);
+  width: 100vw;
+  margin: calc(var(--space-x2) * -1) calc(var(--space-x3) * -1);
+  padding: var(--space-x2) var(--space-x3);
+}
+
+@media (min-width: 475px) {
+  .balanceMessage.isBalanced {
+    padding-right: var(--space-x2);
+    margin-right: var(--space-x2);
+    border-right: 1px solid var(--color-primary-light);
+  }
+
+  .balanceMessage:not(.isBalanced) {
+    color: var(--color-danger-light);
+  }
+
+  .headerContent:not(.isBalanced) {
+    background: transparent;
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+}

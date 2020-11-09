@@ -23,8 +23,6 @@ button.menuButton {
   padding: var(--space-x2) var(--space-x3);
   background: var(--color-primary-light);
   color: var(--color-primary-light-text);
-  display: flex;
-  justify-content: space-between;
   min-height: 35px;
 }
 

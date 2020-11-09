@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { Status } from '../../state/types';
 import { useAction } from '../../state/hooks';
 import fetchBudgetAction from '../../state/budgets/fetchBudget';
-import { makeGetIsBalanced } from '../../state/budgets/selectors';
 import Header from '../../containers/Header';
 import BudgetPageContent from '../../containers/BudgetPageContent';
 import Layout from '../../components/Layout';
@@ -14,8 +12,8 @@ import { BudgetLoaded, BudgetUnloaded } from '../../state/budgets/slice';
 import { getMonthName } from '../../util/date';
 import useBudgetId from '../../hooks/useBudgetId';
 import useBudget from '../../hooks/useBudget';
-import { getDaysLeftMessage, useBalanceMessage } from './util';
 import styles from './budget.module.css';
+import HeaderContent from '../../containers/BudgetPageContent/HeaderContent';
 
 const getPageTitle = (budget?: BudgetLoaded | BudgetUnloaded) => {
   if (!budget || budget.status !== Status.SUCCESS) return '';
@@ -32,8 +30,6 @@ const BudgetPage: NextPage = () => {
 
   const adjusting = router.query.adjusting;
   const setIsAdjustingBudget = useAction(uiSlice.actions.setIsAdjustingBudget);
-  const balanceMessage = useBalanceMessage(budgetId);
-  const isBalanced = useSelector(makeGetIsBalanced(budgetId));
 
   useEffect(() => {
     if (adjusting) setIsAdjustingBudget(true);
@@ -51,8 +47,7 @@ const BudgetPage: NextPage = () => {
     <Layout.Grid>
       <Layout.Header>
         <Header title={getPageTitle(budget)}>
-          <span>{balanceMessage}, </span>
-          {isBalanced && budget && <span>{getDaysLeftMessage(budget)}</span>}
+          <HeaderContent />
         </Header>
       </Layout.Header>
       <Layout.Content className={styles.content}>
