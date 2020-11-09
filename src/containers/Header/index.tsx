@@ -6,6 +6,7 @@ import classNames from '../../util/classNames';
 import { ButtonWithIcon } from '../../components/Button';
 import IconMenu from '../../icons/IconMenu';
 import Nav from './Nav';
+import BudgetDrawer from './BudgetDrawer';
 import Drawer from '../../components/Drawer';
 
 interface Props {
@@ -15,6 +16,7 @@ interface Props {
 const Header: React.FC<Props> = ({ title, children }) => {
   const isMedium = useMediaQuery('(min-width: 475px)');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isBudgetDrawerOpen, setIsBudgetDrawerOpen] = useState(false);
   const hasSubheader = children || isMedium;
 
   return (
@@ -34,12 +36,17 @@ const Header: React.FC<Props> = ({ title, children }) => {
         <h1 className={styles.title}>{title}</h1>
         {isMedium && children}
       </header>
-      {hasSubheader && <div className={styles.subheader}>{isMedium ? <Nav /> : children}</div>}
+      {hasSubheader && (
+        <div className={styles.subheader}>
+          {isMedium ? <Nav onClickBudgetsLink={() => setIsBudgetDrawerOpen(true)} /> : children}
+        </div>
+      )}
       {!isMedium && (
         <Drawer isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} side="left" title="Menu">
-          <Nav />
+          <Nav onClickBudgetsLink={() => setIsBudgetDrawerOpen(true)} />
         </Drawer>
       )}
+      <BudgetDrawer isOpen={isBudgetDrawerOpen} onClose={() => setIsBudgetDrawerOpen(false)} />
     </>
   );
 };
