@@ -15,6 +15,7 @@ import { getMonthName } from '../../util/date';
 import useBudgetId from '../../hooks/useBudgetId';
 import useBudget from '../../hooks/useBudget';
 import { getDaysLeftMessage, useBalanceMessage } from './util';
+import styles from './budget.module.css';
 
 const getPageTitle = (budget?: BudgetLoaded | BudgetUnloaded) => {
   if (!budget || budget.status !== Status.SUCCESS) return '';
@@ -54,7 +55,7 @@ const BudgetPage: NextPage = () => {
           {isBalanced && budget && <span>{getDaysLeftMessage(budget)}</span>}
         </Header>
       </Layout.Header>
-      <Layout.Content>
+      <Layout.Content className={styles.content}>
         <BudgetPageContent budget={budget} />
       </Layout.Content>
     </Layout.Grid>

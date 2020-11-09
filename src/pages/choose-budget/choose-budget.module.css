@@ -1,6 +1,5 @@
 .container {
   height: 100vh;
-  background: var(--color-primary-dark);
   text-align: center;
   overflow: hidden;
   padding: 0 var(--space-x6);
