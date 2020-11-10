@@ -1,0 +1,39 @@
+.icon {
+  display: block;
+  fill: var(--color-primary-dark-text);
+}
+
+.label {
+  position: absolute;
+  display: inline-block;
+  width: 1px;
+  height: 1px;
+  clip: rect(0px, 0px, 0px, 0px);
+  margin: -1px;
+  overflow: hidden;
+}
+
+.input {
+  display: flex;
+}
+
+.input input {
+  flex-grow: 1;
+}
+
+.submitButton {
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  padding: var(--space-x1);
+  vertical-align: text-bottom;
+  margin-top: var(--space-x1);
+  flex-shrink: 0;
+}
+
+.submitButton:focus,
+.submitButton:hover {
+  background: rgba(0, 0, 0, 0.125);
+}
