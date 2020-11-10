@@ -4,6 +4,8 @@ import budgetsSlice from '../budgets/slice';
 import { getClosestToToday, SimpleDate } from '../../util/date';
 import { StateTransaction } from './types';
 import categoriesSlice from '../categories/slice';
+import transactionSearchResultsSlice from '../transactionSearchResults/slice';
+import arrayToMap from '../../util/arrayToMap';
 
 const initialState: Dictionary<string, StateTransaction> = {};
 
@@ -109,6 +111,13 @@ const transactionsSlice = createSlice({
         isNew: true,
       };
     },
+    [transactionSearchResultsSlice.actions.searchTransactionsSuccess.toString()]: (
+      state,
+      action: PayloadAction<{ transactions: Budget.Transaction[] }>,
+    ) => ({
+      ...state,
+      ...arrayToMap(action.payload.transactions),
+    }),
   },
 });
 

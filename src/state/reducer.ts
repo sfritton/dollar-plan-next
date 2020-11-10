@@ -7,6 +7,9 @@ import transactionsSlice, { name as transactionsName } from './transactions/slic
 import transactionsToDeleteSlice, {
   name as transactionsToDeleteName,
 } from './transactionsToDelete/slice';
+import transactionSearchResultsSlice, {
+  name as transactionSearchResultsName,
+} from './transactionSearchResults/slice';
 
 export default combineReducers({
   [uiName]: uiSlice.reducer,
@@ -15,4 +18,5 @@ export default combineReducers({
   [categoriesName]: categoriesSlice.reducer,
   [transactionsName]: transactionsSlice.reducer,
   [transactionsToDeleteName]: transactionsToDeleteSlice.reducer,
+  [transactionSearchResultsName]: transactionSearchResultsSlice.reducer,
 });
