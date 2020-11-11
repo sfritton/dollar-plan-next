@@ -1,3 +1,5 @@
 import { AppState } from '../types';
 
-export const getTransactionSearchResults = (state: AppState) => state.transactionSearchResults;
+export const getTransactionSearchStatus = (state: AppState) =>
+  state.transactionSearchResults.status;
+export const getTransactionSearchResults = (state: AppState) => state.transactionSearchResults.ids;

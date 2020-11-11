@@ -31,6 +31,7 @@
   vertical-align: text-bottom;
   margin-top: var(--space-x1);
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .submitButton:focus,

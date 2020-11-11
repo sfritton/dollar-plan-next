@@ -5,11 +5,13 @@ import slice from './slice';
 function searchTransactions(searchTerm: string): AppThunk {
   return async dispatch => {
     try {
+      dispatch(slice.actions.searchTransactionsPending());
+
       const transactions = await SearchTransactions(searchTerm);
 
       dispatch(slice.actions.searchTransactionsSuccess({ transactions }));
     } catch (error) {
-      // do nothing
+      dispatch(slice.actions.searchTransactionsFailure());
     }
   };
 }

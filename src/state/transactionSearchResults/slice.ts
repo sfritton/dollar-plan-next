@@ -1,7 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Budget } from '../../types/budget';
+import { Status } from '../types';
 
-const initialState: Budget.Id[] = [];
+const initialState = {
+  ids: [] as Budget.Id[],
+  status: Status.INIT,
+};
 
 export const name = 'transactionSearchResults' as const;
 
@@ -9,10 +13,12 @@ const transactionSearchResultsSlice = createSlice({
   name,
   initialState,
   reducers: {
+    searchTransactionsPending: state => ({ ...state, status: Status.LOADING }),
     searchTransactionsSuccess: (
       state,
       action: PayloadAction<{ transactions: Budget.Transaction[] }>,
-    ) => action.payload.transactions.map(({ id }) => id),
+    ) => ({ ids: action.payload.transactions.map(({ id }) => id), status: Status.SUCCESS }),
+    searchTransactionsFailure: state => ({ ...state, status: Status.FAILURE }),
   },
 });
 
