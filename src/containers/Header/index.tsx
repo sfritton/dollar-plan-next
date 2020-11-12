@@ -1,73 +1,54 @@
-import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { getMonthName } from '../../util/date';
-import SubHeader from './SubHeader';
+import React, { useState } from 'react';
+import Head from 'next/head';
+import { useMediaQuery } from 'beautiful-react-hooks';
 import styles from './header.module.css';
-import IconAdjust from '../../icons/IconAdjust';
+import classNames from '../../util/classNames';
 import { ButtonWithIcon } from '../../components/Button';
+import IconMenu from '../../icons/IconMenu';
+import Nav from './Nav';
 import BudgetDrawer from './BudgetDrawer';
-import uiSlice from '../../state/ui/slice';
-import { getIsAdjustingBudget } from '../../state/ui/selectors';
-import IconClose from '../../icons/IconClose';
-import IconSave from '../../icons/IconSave';
-import { useAction } from '../../state/hooks';
-import useBudget from '../../hooks/useBudget';
-import saveBudgetAction from '../../state/budgets/saveBudget';
-import fetchBudgetAction from '../../state/budgets/fetchBudget';
-import useBudgetId from '../../hooks/useBudgetId';
-import groupsSlice from '../../state/groups/slice';
-import categoriesSlice from '../../state/categories/slice';
+import Drawer from '../../components/Drawer';
 
-function Header() {
-  const budgetId = useBudgetId();
-  const budget = useBudget();
-  const isAdjustingBudget = useSelector(getIsAdjustingBudget);
-  const setIsAdjustingBudget = useAction(uiSlice.actions.setIsAdjustingBudget);
-  const saveBudget = useAction(saveBudgetAction);
-  const fetchBudget = useAction(fetchBudgetAction);
-  const resetGroups = useAction(groupsSlice.actions.resetGroups);
-  const resetCategories = useAction(categoriesSlice.actions.resetCategories);
+interface Props {
+  title: string;
+}
 
-  const handleCancel = useCallback(() => {
-    setIsAdjustingBudget(false);
-    fetchBudget(budgetId);
-    resetGroups();
-    resetCategories();
-  }, [setIsAdjustingBudget, fetchBudget, resetGroups, resetCategories, budgetId]);
-
-  const handleSave = useCallback(() => {
-    setIsAdjustingBudget(false);
-    saveBudget(budgetId);
-  }, [setIsAdjustingBudget, saveBudget, budgetId]);
+const Header: React.FC<Props> = ({ title, children }) => {
+  const isMedium = useMediaQuery('(min-width: 475px)');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isBudgetDrawerOpen, setIsBudgetDrawerOpen] = useState(false);
+  const hasSubheader = children || isMedium;
 
   return (
     <>
-      <div className={styles.header}>
-        {budget && (
-          <>
-            {isAdjustingBudget ? (
-              <ButtonWithIcon Icon={IconClose} label="Cancel" onClick={handleCancel} />
-            ) : (
-              <BudgetDrawer />
-            )}
-            <h1 className={styles.title}>
-              {getMonthName(budget.month)} {budget.year}
-            </h1>
-            {isAdjustingBudget ? (
-              <ButtonWithIcon Icon={IconSave} label="Save changes" onClick={handleSave} />
-            ) : (
-              <ButtonWithIcon
-                Icon={IconAdjust}
-                label="Adjust budget"
-                onClick={() => setIsAdjustingBudget(true)}
-              />
-            )}
-          </>
+      <Head>
+        <title>{title} | Dollar Plan</title>
+      </Head>
+      <header className={classNames({ [styles.withoutSubheader]: !hasSubheader }, styles.header)}>
+        {!isMedium && (
+          <ButtonWithIcon
+            className={styles.menuButton}
+            Icon={IconMenu}
+            label="Menu"
+            onClick={() => setIsMenuOpen(true)}
+          />
         )}
-      </div>
-      <SubHeader />
+        <h1 className={styles.title}>{title}</h1>
+        {isMedium && children}
+      </header>
+      {hasSubheader && (
+        <div className={styles.subheader}>
+          {isMedium ? <Nav onClickBudgetsLink={() => setIsBudgetDrawerOpen(true)} /> : children}
+        </div>
+      )}
+      {!isMedium && (
+        <Drawer isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} side="left" title="Menu">
+          <Nav onClickBudgetsLink={() => setIsBudgetDrawerOpen(true)} />
+        </Drawer>
+      )}
+      <BudgetDrawer isOpen={isBudgetDrawerOpen} onClose={() => setIsBudgetDrawerOpen(false)} />
     </>
   );
-}
+};
 
 export default Header;

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getStatus, getBudgetIds } from '../../../state/budgets/selectors';
-import IconCalendar from '../../../icons/IconCalendar';
-import { ButtonWithIcon } from '../../../components/Button';
 import Drawer from '../../../components/Drawer';
 import fetchBudgetsAction from '../../../state/budgets/fetchBudgets';
 import { Status } from '../../../state/types';
@@ -12,13 +10,16 @@ import Footer from './Footer';
 import { useAction } from '../../../state/hooks';
 import useBudgetId from '../../../hooks/useBudgetId';
 
-function BudgetDrawer() {
+interface Props {
+  isOpen: boolean;
+  onClose: AnyFunction;
+}
+
+const BudgetDrawer: React.FC<Props> = ({ isOpen, onClose }) => {
   const budgetId = useBudgetId();
 
   const budgetIds = useSelector(getBudgetIds);
   const status = useSelector(getStatus);
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const fetchBudgets = useAction(fetchBudgetsAction);
 
@@ -29,28 +30,14 @@ function BudgetDrawer() {
   }, [status, fetchBudgets]);
 
   return (
-    <>
-      <ButtonWithIcon Icon={IconCalendar} label="Switch budget" onClick={() => setIsOpen(true)} />
-      <Drawer
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        side="left"
-        title="Choose a budget"
-        Footer={Footer}
-      >
-        <ul className={styles.budgetDrawer}>
-          {budgetIds.map(id => (
-            <BudgetButton
-              id={id}
-              key={id}
-              isCurrent={String(id) === budgetId}
-              onClick={() => setIsOpen(false)}
-            />
-          ))}
-        </ul>
-      </Drawer>
-    </>
+    <Drawer isOpen={isOpen} onClose={onClose} side="left" title="Budgets" Footer={Footer}>
+      <ul className={styles.budgetDrawer}>
+        {budgetIds.map(id => (
+          <BudgetButton id={id} key={id} isCurrent={String(id) === budgetId} onClick={onClose} />
+        ))}
+      </ul>
+    </Drawer>
   );
-}
+};
 
 export default BudgetDrawer;

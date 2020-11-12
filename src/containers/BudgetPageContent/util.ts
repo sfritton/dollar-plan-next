@@ -1,21 +1,12 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
-import classNames from '../../util/classNames';
 import { hasMonthStarted, hasMonthEnded, getDaysLeft } from '../../util/date';
 import { BudgetWithMetadata } from '../../state/budgets/slice';
-import {
-  makeGetActualBalance,
-  makeGetPlannedBalance,
-  makeGetIsBalanced,
-} from '../../state/budgets/selectors';
-import styles from './header.module.css';
+import { makeGetActualBalance, makeGetPlannedBalance } from '../../state/budgets/selectors';
 import { getDollarString } from '../../util/currency';
 import { getIsAdjustingBudget } from '../../state/ui/selectors';
-import useBudgetId from '../../hooks/useBudgetId';
-import useBudget from '../../hooks/useBudget';
 import { Budget } from '../../types/budget';
 
-const getDaysLeftMessage = (budget: BudgetWithMetadata) => {
+export const getDaysLeftMessage = (budget: BudgetWithMetadata) => {
   const date = { month: budget.month, year: budget.year };
   if (!hasMonthStarted(date)) {
     return 'Month has not started';
@@ -28,7 +19,7 @@ const getDaysLeftMessage = (budget: BudgetWithMetadata) => {
   return `${getDaysLeft(date)} days left`;
 };
 
-const useBalanceMessage = (budgetId: Budget.Id) => {
+export const useBalanceMessage = (budgetId: Budget.Id) => {
   const isAdjustingBudget = useSelector(getIsAdjustingBudget);
   const plannedBalance = useSelector(makeGetPlannedBalance(budgetId)) || 0;
   const actualBalance = useSelector(makeGetActualBalance(budgetId)) || 0;
@@ -51,27 +42,3 @@ const useBalanceMessage = (budgetId: Budget.Id) => {
 
   return 'Balance: $' + getDollarString(actualBalance);
 };
-
-function SubHeader() {
-  const budgetId = useBudgetId();
-  const budget = useBudget();
-
-  const balanceMessage = useBalanceMessage(budgetId);
-  const isBalanced = useSelector(makeGetIsBalanced(budgetId));
-
-  if (!budget) return <div className={styles.subheader} />;
-
-  return (
-    <div
-      className={classNames(
-        { [styles.subheaderUnbalanced]: isBalanced === false },
-        styles.subheader,
-      )}
-    >
-      <span>{balanceMessage}</span>
-      {isBalanced && <span>{getDaysLeftMessage(budget)}</span>}
-    </div>
-  );
-}
-
-export default SubHeader;

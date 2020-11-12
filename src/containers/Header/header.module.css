@@ -7,17 +7,22 @@
   align-items: flex-end;
 }
 
+.header.withoutSubheader {
+  border-bottom: 1px solid var(--color-primary-light);
+}
+
+button.menuButton {
+  margin-right: var(--space-x1);
+}
+
 .title {
   flex-grow: 1;
-  margin-left: var(--space-x3);
 }
 
 .subheader {
   padding: var(--space-x2) var(--space-x3);
   background: var(--color-primary-light);
   color: var(--color-primary-light-text);
-  display: flex;
-  justify-content: space-between;
   min-height: 35px;
 }
 

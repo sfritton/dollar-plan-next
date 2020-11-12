@@ -1,5 +1,5 @@
 .group {
-  margin-bottom: var(--space-x4);
+  margin-bottom: calc(var(--space-x4) * 2);
 }
 
 .title {
