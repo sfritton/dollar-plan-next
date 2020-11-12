@@ -15,12 +15,14 @@ export interface InputProps {
 
 const InputBase: React.FC<InputProps & {
   prefix?: string;
+  postfix?: React.ReactNode;
   min?: string;
   isNumeric?: boolean;
 }> = ({
   className = '',
   defaultValue,
   prefix,
+  postfix,
   label,
   onChange,
   placeholder,
@@ -59,6 +61,7 @@ const InputBase: React.FC<InputProps & {
         className={classNames({
           [styles.input]: true,
           [styles.withPrefix]: Boolean(prefix),
+          [styles.withPostfix]: Boolean(postfix),
         })}
         type="text"
         inputMode={isNumeric ? 'numeric' : undefined}
@@ -68,6 +71,7 @@ const InputBase: React.FC<InputProps & {
         placeholder={placeholder}
         min={min}
       />
+      {postfix && <div className={styles.postfix}>{postfix}</div>}
     </div>
   );
 };

@@ -22,7 +22,7 @@ export const registerRoutes = (app: Express.Application, db: PostgresDB) => {
     const searchTerm = req.params.searchTerm;
 
     try {
-      const transactions = await searchTransactions(db, searchTerm);
+      const transactions = await searchTransactions(db, `%${searchTerm}%`);
       return res.json(transactions);
     } catch (error) {
       // tslint:disable-next-line:no-console
